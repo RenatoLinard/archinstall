@@ -3,6 +3,7 @@
 # ------------------------------------------------------
 # Install Script for Arch Linux
 # IMPORTANT: chmod +x arch-install.sh
+# https://www.youtube.com/watch?v=o09jzArQcFQ
 # ------------------------------------------------------
 
 # Set System Time
