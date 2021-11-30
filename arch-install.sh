@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# ------------------------------------------------------
+# Install Script for Arch Linux
+# IMPORTANT: chmod +x arch-install.sh
+# ------------------------------------------------------
+
 # Set System Time
 ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 hwclock --systohc
