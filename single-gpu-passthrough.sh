@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # https://gitlab.com/risingprismtv/single-gpu-passthrough/-/wikis/1)-Preparations
+# https://github.com/QaidVoid/Complete-Single-GPU-Passthrough
 # amd_iommu=on iommu=pt video=efifb:off
 # sudo vim /etc/default/grub
 # grub-mkconfig -o /boot/grub/grub.cfg
