@@ -38,4 +38,9 @@ git clone https://gitlab.com/stephan.raabe/arch-install-script.git
 ls
 cd arch-install-script
 chmod -x ...
-
+vim /etc/mkinitcpio.conf
+MODULES=(amdgpu)
+mkinitcpio -p linux-lts
+exit
+umount -R /mnt
+reboot
