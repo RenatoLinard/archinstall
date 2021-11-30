@@ -8,6 +8,10 @@ exit
 ip -c a
 
 cfdisk
+250M /boot/efi
+1GB /SWAP
+50GB /
+Rest /home
 
 lsblk
 
