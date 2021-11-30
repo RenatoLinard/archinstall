@@ -44,3 +44,5 @@ mkinitcpio -p linux-lts
 exit
 umount -R /mnt
 reboot
+
+nmcli device wifi connect WLAN-381152 password 22036727328731084417
