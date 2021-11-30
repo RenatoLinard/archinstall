@@ -30,4 +30,8 @@ genfstab -U /mnt >> /mnt/etc/fstab
 
 arch-chroot /mnt
 
-git clone 
+git clone https://gitlab.com/stephan.raabe/arch-install-script.git
+ls
+cd arch-install-script
+chmod -x ...
+
