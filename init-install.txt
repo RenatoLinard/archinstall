@@ -1,0 +1,33 @@
+loadkeys de
+loadkeys de-latin1
+
+iwctl
+station wlan0 connect WLAN-
+exit
+
+ip -c a
+
+cfdisk
+
+lsblk
+
+mkfs.vfat /dev/nvm...1
+mkswap /dev/nvm...2
+swapon /dev/nvm...2
+mkfs.ext4 /dev/nvm...3
+mkfs.ext4 /dev/nvm...4
+lsblk
+
+mount /dev/nvm...3 /mnt
+mkdir -p /mnt/{boot/efi,home}
+mount /dev/nvm...1 /mnt/boot/efi
+mount /dev/nvm...4 /mnt/home
+lsblk
+
+pacstrap /mnt base linux-lts linux-firmware git vim amd-ucode
+
+genfstab -U /mnt >> /mnt/etc/fstab
+
+arch-chroot /mnt
+
+git clone 
