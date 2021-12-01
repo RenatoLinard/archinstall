@@ -22,3 +22,6 @@ sudo chmod -R 660 /usr/share/vgabios/gpu.rom
 sudo chown raabe:raabe /usr/share/vgabios/gpu.rom
 
 # <rom file="/usr/share/vgabios/gpu.rom"/>
+
+# Start Virtual Network with every system start
+# sudo virsh net-autostart default
