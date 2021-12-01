@@ -43,3 +43,6 @@ mkinitcpio -p linux-lts
 exit
 umount -R /mnt
 reboot
+
+# Set System Time
+sudo timedatectl set-local-rtc 1 --adjust-system-clock
