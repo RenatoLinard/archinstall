@@ -2,7 +2,7 @@ loadkeys de
 loadkeys de-latin1
 
 iwctl
-station wlan0 connect WLAN-
+station wlan0 connect WLAN- password 24243
 exit
 
 ip -c a
