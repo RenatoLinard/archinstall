@@ -10,9 +10,9 @@
 ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 hwclock --systohc
 
-# These step needs to be done manuelly for now.
-# sed -i '177s/.//' /etc/locale.gen
-# locale-gen
+# set lang utf8 US
+sed -i '177s/.//' /etc/locale.gen
+locale-gen
 
 # Set Keyboard
 echo "LANG=en_US.UTF-8" >> /etc/locale.conf
