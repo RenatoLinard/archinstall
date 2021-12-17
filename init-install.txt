@@ -2,12 +2,13 @@ loadkeys de
 loadkeys de-latin1
 
 iwctl
-station wlan0 connect WLAN- password 24243
+station wlan0 connect WLAN
 exit
 
 ip -c a
 
-cfdisk
+lsblk
+cfdisk /dev/nvme0n1
 250M /boot/efi
 1GB /SWAP
 50GB /
