@@ -1,0 +1,3 @@
+setkbmap de &
+picom &
+nitrogen --restore 
