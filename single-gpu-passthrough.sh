@@ -30,3 +30,6 @@ sudo chown raabe:raabe /usr/share/vgabios/gpu.rom
 
 # Start Virtual Network with every system start
 # sudo virsh net-autostart default
+
+# virtio driver windows 11
+# https://github.com/virtio-win/virtio-win-pkg-scripts/blob/master/README.md
