@@ -29,6 +29,7 @@ sudo systemctl restart libvirtd
 # git clone https://github.com/gnif/vendor-reset.git
 # sudo pacman -S git dkms base-devel linux-headers
 
+# https://www.reddit.com/r/VFIO/comments/khacye/is_there_an_idiotproof_guide_on_how_to_setup_the/
 # sudo echo "vendor-reset" | sudo tee /etc/modules-load.d/vendor-reset.conf
 # sudo dkms install .
 # Add vendor reset to kernel modules (after btrf)
