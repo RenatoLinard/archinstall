@@ -2,9 +2,11 @@
 
 # ------------------------------------------------------
 # Install Script for Arch Linux
-# IMPORTANT: chmod +x arch-install.sh
+# IMPORTANT: chmod +x archinstall.sh
 # https://www.youtube.com/watch?v=o09jzArQcFQ
 # ------------------------------------------------------
+
+echo "START ARCH INSTALLATION..."
 
 # ------------------------------------------------------
 # Set System Time
@@ -92,5 +94,5 @@ echo "Services enabled"
 # nmcli device wifi connect WLAN-381152 password 22036727328731084417
 # nmtui
 
-echo "DONE... You can reboot the system now..."
+echo "DONE! You can reboot the system now..."
 echo "Activate WIFI after the reboot with nmtui."

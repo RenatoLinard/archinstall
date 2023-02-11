@@ -45,5 +45,3 @@ exit
 umount -R /mnt
 reboot
 
-# Set System Time in XFCE
-sudo timedatectl set-local-rtc 1 --adjust-system-clock
