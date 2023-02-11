@@ -1,8 +1,0 @@
-# Keyboard Layout
-setxkbmap de &
-
-# Display Manager
-picom &
-
-# Wallpaper
-nitrogen --restore &
