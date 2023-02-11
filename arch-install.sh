@@ -60,6 +60,7 @@ usermod -aG libvirt raabe
 echo "raabe ALL=(ALL) ALL" >> /etc/sudoers.d/raabe
 
 # setup wifi 
-nmcli device wifi connect WLAN-381152 password 22036727328731084417
+# nmcli device wifi connect WLAN-381152 password 22036727328731084417
+nmtui
 
 printf "\e[1;32mDone! Type exit, umount -a and reboot.\e[0m"
