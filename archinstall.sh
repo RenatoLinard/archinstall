@@ -27,7 +27,7 @@ echo "Time set to Berlin and synchronized with the internet..."
 # set lang utf8 US
 # ------------------------------------------------------
 echo "-> Set language"
-sed -i '178s/.//' /etc/locale.gen
+echo 'LANG="en_US.UTF-8"' >> /etc/locale.conf
 locale-gen
 echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 echo "UTF-8 US in local-gen activated..."
@@ -84,7 +84,7 @@ echo "raabe added as new user with sudo priviliges..."
 # Install GRUB
 # ------------------------------------------------------
 echo "-> Install GRUB"
-grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 grub-mkconfig -o /boot/grub/grub.cfg
 echo "GRUB installed..."
 
