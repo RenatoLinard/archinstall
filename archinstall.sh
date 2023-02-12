@@ -6,6 +6,12 @@
 # https://www.youtube.com/watch?v=o09jzArQcFQ
 # ------------------------------------------------------
 
+# ------------------------------------------------------
+# CONGIG
+# ------------------------------------------------------
+myuser="MYUSER"
+mypassword="MYPASS"
+
 read -p "Do you want to start? " s
 echo "START ARCH INSTALLATION..."
 
@@ -47,7 +53,7 @@ echo "Hostname and localhost set..."
 # Set Root Password
 # ------------------------------------------------------
 echo "-> Set root password"
-echo root:sancho | chpasswd
+echo root:$mypassword | chpasswd
 echo "Root password set..."
 
 # ------------------------------------------------------
@@ -69,9 +75,9 @@ echo "GPU driver installed..."
 # Add User raabe
 # ------------------------------------------------------
 echo "-> Add user"
-useradd -m raabe
-echo raabe:sancho | chpasswd
-echo "raabe ALL=(ALL) ALL" >> /etc/sudoers.d/raabe
+useradd -m $myuser
+echo raabe:$mypassword | chpasswd
+echo "raabe ALL=(ALL) ALL" >> /etc/sudoers.d/$myuser
 echo "raabe added as new user with sudo priviliges..."
 
 # ------------------------------------------------------

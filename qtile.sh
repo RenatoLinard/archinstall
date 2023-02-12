@@ -34,33 +34,33 @@ echo "Pip packages installed"
 # Clone dotfiles
 # ------------------------------------------------------
 echo "-> Install dotfiles."
-git clone https://gitlab.com/stephan-raabe/dotfiles.git /home/raabe/
+git clone https://gitlab.com/stephan-raabe/dotfiles.git /home/$(whoami)/
 echo "dotfiles clones into home directory"
-chmod +x /home/raabe/dotfiles/gitpush.sh
+chmod +x /home/$(whoami)/dotfiles/gitpush.sh
 
 # ------------------------------------------------------
 # Create symbolic links
 # ------------------------------------------------------
 echo "-> Create symbolic links"
-mkdir /home/raabe/.config
-ln -s /home/raabe/dotfiles/qtile/ ~/.config
-ln -s /home/raabe/dotfiles/alacritty/ ~/.config
-ln -s /home/raabe/dotfiles/neomutt/ ~/.config
-ln -s /home/raabe/dotfiles/picom/ ~/.config
-ln -s /home/raabe/dotfiles/ranger/ ~/.config
-ln -s /home/raabe/dotfiles/rofi/ ~/.config
-ln -s /home/raabe/dotfiles/spotifyd/ ~/.config
-ln -s /home/raabe/dotfiles/vim/ ~/.config
-rm /home/raabe/.bashrc
-ln -s /home/raabe/dotfiles/.bashrc ~/.basrc
-ln -s /home/raabe/dotfiles/vim/ ~/.config
+mkdir /home/$(whoami)/.config
+ln -s /home/$(whoami)/dotfiles/qtile/ ~/.config
+ln -s /home/$(whoami)/dotfiles/alacritty/ ~/.config
+ln -s /home/$(whoami)/dotfiles/neomutt/ ~/.config
+ln -s /home/$(whoami)/dotfiles/picom/ ~/.config
+ln -s /home/$(whoami)/dotfiles/ranger/ ~/.config
+ln -s /home/$(whoami)/dotfiles/rofi/ ~/.config
+ln -s /home/$(whoami)/dotfiles/spotifyd/ ~/.config
+ln -s /home/$(whoami)/dotfiles/vim/ ~/.config
+rm /home/($whoami)/.bashrc
+ln -s /home/($whoami)/dotfiles/.bashrc ~/.basrc
+ln -s /home/($whoami)/dotfiles/vim/ ~/.config
 echo "Symbolic links created..."
 
 # ------------------------------------------------------
 # Clone wallpapers
 # ------------------------------------------------------
 echo "-> Install wallpapers"
-git clone https://gitlab.com/stephan-raabe/wallpaper.git /home/raabe/
+git clone https://gitlab.com/stephan-raabe/wallpaper.git /home/$(whoami)/
 echo "wallpapers cloned into home directory"
 
 echo "Manual steps required:"

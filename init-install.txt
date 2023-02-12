@@ -1,18 +1,40 @@
+# Load keyboard layout
 loadkeys de
-loadkeys de-latin1
 
-iwctl
-station wlan0 connect WLAN
-exit
+# Connect to WLAN (if not LAN)
+iwctl --passphrase 22036727328731084417 station wlan0 connect WLAN-381152
 
-ip -c a
+# Check internet connection
+ping -c4 www.google.de
 
+# Sync time
+timedatectl set-ntp true
+
+# Reflector setup
+reflector -c Germany -a 6 --sort rate --save /etc/pacman.d/mirrorlist
+
+# Pacman sync
+pacman -Syy
+
+# Check partitions
 lsblk
-cfdisk /dev/nvme0n1
-250M /boot/efi
-1GB /SWAP
-50GB /
-Rest /home
+
+# Create partitions
+gdisk /dev/sda
+1: +300M ef00
+2: +2G 8200
+3: Rest 8300
+Write: w, Confirm with Y
+
+# Format partitions
+mkfs.fat -F32 /dev/sda1
+mkswap /dev/sda2
+swapon /dev/sda2
+mkfs.btrfs /dev/sda3
+
+# Mount points for btrfs
+mount /dev/sda3 /mnt
+btrfs su cr /mnt/@
 
 lsblk
 
