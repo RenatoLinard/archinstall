@@ -35,35 +35,41 @@ mkfs.btrfs /dev/sda3
 # Mount points for btrfs
 mount /dev/sda3 /mnt
 btrfs su cr /mnt/@
+btrfs su cr /mnt/@home
+btrfs su cr /mnt/@snapshots
+btrfs su cr /mnt/@var_log
+umount /mnt
+mount -o noatime,compress=lzo,space_cache=v2,subvol=@ /dev/sda3 /mnt
+mkdir -p /mnt/{boot,home,.snapshots,var_log}
+mount -o noatime,compress=lzo,space_cache=v2,subvol=@home /dev/sda3 /mnt/home
+mount -o noatime,compress=lzo,space_cache=v2,subvol=@snapshots /dev/sda3 /mnt/.snapshots
+mount -o noatime,compress=lzo,space_cache=v2,subvol=@var_log /dev/sda3 /mnt/var_log
+mount /dev/sda1 /mnt/boot
 
-lsblk
+# Install base packages
+pacstrap /mnt base linux linux-firmware vim amd-ucode
 
-mkfs.vfat /dev/nvm...1
-mkswap /dev/nvm...2
-swapon /dev/nvm...2
-mkfs.ext4 /dev/nvm...3
-mkfs.ext4 /dev/nvm...4
-lsblk
-
-mount /dev/nvm...3 /mnt
-mkdir -p /mnt/{boot/efi,home}
-mount /dev/nvm...1 /mnt/boot/efi
-mount /dev/nvm...4 /mnt/home
-lsblk
-
-pacstrap /mnt base linux linux-firmware git vim amd-ucode
-
+# Generate fstab
 genfstab -U /mnt >> /mnt/etc/fstab
 
+# Enter the Arch install directory
 arch-chroot /mnt
 
-git clone https://gitlab.com/stephan.raabe/arch-install-script.git
-cd arch-install-script
-chmod -x ...
+# Clone archinstall
+git clone https://gitlab.com/stephan.raabe/archinstall.git
+
+# Add btrfs to mkinitcpio
 vim /etc/mkinitcpio.conf
-MODULES=(amdgpu)
+MODULES=(btrfs)
 mkinitcpio -p linux
+
+# Install grub
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB --removable
+grub-mkconfig -o /boot/grub/grub.cfg
+
+sudo vim /etc/sudoers
+
 exit
-umount -R /mnt
+umount -a
 reboot
 
