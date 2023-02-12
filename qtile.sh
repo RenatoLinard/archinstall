@@ -13,21 +13,21 @@ echo "START QTILE INSTALLATION..."
 # Install required packages
 # ------------------------------------------------------
 echo "-> Install main packages"
-pacman -S qtile picom starship chromium slock neomutt rofi pip neomutt nitrogen dunst ueberzug mpv freerdp spotifyd xfce4-power-manager python-pip chromium
+pacman -S xorg xorg-xinit qtile picom starship chromium slock neomutt rofi pip neomutt nitrogen dunst ueberzug mpv freerdp spotifyd xfce4-power-manager python-pip chromium
 echo "Main packages installed..."
 
 # ------------------------------------------------------
 # Install required packages
 # ------------------------------------------------------
 echo "-> Install AUR packages"
-yay -S pywal spotify-tui yaru-gtk-theme yaru-icon-theme
+yay -S pywal 
 echo "AUR packages installed..."
 
 # ------------------------------------------------------
 # Install Pip packages
 # ------------------------------------------------------
 echo "-> Install Pip packages"
-pip install openai
+pip install openai psutil
 echo "Pip packages installed"
 
 # ------------------------------------------------------
@@ -52,8 +52,7 @@ ln -s /home/$(whoami)/dotfiles/rofi/ ~/.config
 ln -s /home/$(whoami)/dotfiles/spotifyd/ ~/.config
 ln -s /home/$(whoami)/dotfiles/vim/ ~/.config
 rm /home/($whoami)/.bashrc
-ln -s /home/($whoami)/dotfiles/.bashrc ~/.basrc
-ln -s /home/($whoami)/dotfiles/vim/ ~/.config
+ln -s /home/$(whoami)/dotfiles/.bashrc ~/.basrc
 echo "Symbolic links created..."
 
 # ------------------------------------------------------
