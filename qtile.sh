@@ -13,14 +13,14 @@ echo "START QTILE INSTALLATION..."
 # Install required packages
 # ------------------------------------------------------
 echo "-> Install main packages"
-pacman -S xorg xorg-xinit qtile picom starship chromium slock neomutt rofi pip neomutt nitrogen dunst ueberzug mpv freerdp spotifyd xfce4-power-manager python-pip chromium
+pacman -S xorg xorg-xinit qtile alacritty picom starship chromium slock neomutt rofi pip neomutt nitrogen dunst ueberzug mpv freerdp spotifyd xfce4-power-manager python-pip chromium
 echo "Main packages installed..."
 
 # ------------------------------------------------------
 # Install required packages
 # ------------------------------------------------------
 echo "-> Install AUR packages"
-yay -S pywal 
+yay -S pywal nerd-fonts-complete-starship 
 echo "AUR packages installed..."
 
 # ------------------------------------------------------
@@ -61,6 +61,11 @@ echo "Symbolic links created..."
 echo "-> Install wallpapers"
 git clone https://gitlab.com/stephan-raabe/wallpaper.git /home/$(whoami)/
 echo "wallpapers cloned into home directory"
+
+# ------------------------------------------------------
+# Init pywal
+# ------------------------------------------------------
+wal -i ~/wallpaper/default.jpg
 
 echo "Manual steps required:"
 echo "Install Nerd fonts"
