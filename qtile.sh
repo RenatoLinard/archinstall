@@ -52,7 +52,9 @@ ln -s /home/$(whoami)/dotfiles/rofi/ ~/.config
 ln -s /home/$(whoami)/dotfiles/spotifyd/ ~/.config
 ln -s /home/$(whoami)/dotfiles/vim/ ~/.config
 rm /home/($whoami)/.bashrc
-ln -s /home/$(whoami)/dotfiles/.bashrc ~/.basrc
+ln -s /home/$(whoami)/dotfiles/.bashrc ~/.bashrc
+rm /home/$(whoami)/.xinitrc
+ln -s /home/$(whoami)/dotfiles/.xinitrc ~/.xinitrc
 echo "Symbolic links created..."
 
 # ------------------------------------------------------
