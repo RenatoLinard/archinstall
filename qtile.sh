@@ -56,6 +56,7 @@ rm /home/($whoami)/.bashrc
 ln -s /home/$(whoami)/dotfiles/.bashrc ~/.bashrc
 rm /home/$(whoami)/.xinitrc
 ln -s /home/$(whoami)/dotfiles/.xinitrc ~/.xinitrc
+ln -s /home/$(whoami)/dotfiles/starship/starship.toml ~/.config/starship.toml
 echo "Symbolic links created..."
 
 # ------------------------------------------------------
@@ -70,7 +71,12 @@ echo "wallpapers cloned into home directory"
 # ------------------------------------------------------
 wal -i ~/wallpaper/default.jpg
 
+# ------------------------------------------------------
+# Install startship plain text 
+# ------------------------------------------------------
+starship preset plain-text-symbols > ~/.config/starship.toml
+
+
 echo "Manual steps required:"
-echo "Install Nerd fonts"
 echo "Activate git config credential.helper store in repositories to disable credentials."
 echo "DONE!"
