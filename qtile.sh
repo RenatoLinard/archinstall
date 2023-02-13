@@ -4,6 +4,7 @@
 # Install Script for Qtile
 # IMPORTANT: chmod +x qtile.sh
 # yay must be installed
+# Copy this script into the home directory and start.
 # ------------------------------------------------------
 
 read -p "Do you want to start? " s
@@ -13,14 +14,14 @@ echo "START QTILE INSTALLATION..."
 # Install required packages
 # ------------------------------------------------------
 echo "-> Install main packages"
-pacman -S xorg xorg-xinit qtile alacritty picom starship chromium slock neomutt rofi pip neomutt nitrogen dunst ueberzug mpv freerdp spotifyd xfce4-power-manager python-pip chromium thunar lxappearance papirus-icon-theme
+pacman -S xorg xorg-xinit qtile alacritty picom starship chromium slock neomutt rofi pip neomutt nitrogen dunst ueberzug mpv freerdp spotifyd xfce4-power-manager python-pip chromium thunar lxappearance papirus-icon-theme ttf-font-awesome
 echo "Main packages installed..."
 
 # ------------------------------------------------------
 # Install required packages
 # ------------------------------------------------------
 echo "-> Install AUR packages"
-yay -S pywal nerd-fonts-complete-starship 
+yay -S pywal 
 echo "AUR packages installed..."
 
 # ------------------------------------------------------
