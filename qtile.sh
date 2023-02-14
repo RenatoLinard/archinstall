@@ -14,7 +14,7 @@ echo "START QTILE INSTALLATION..."
 # Install required packages
 # ------------------------------------------------------
 echo "-> Install main packages"
-pacman -S xorg xorg-xinit qtile alacritty picom starship chromium slock neomutt rofi pip neomutt dunst ueberzug mpv freerdp spotifyd xfce4-power-manager python-pip chromium thunar lxappearance papirus-icon-theme ttf-font-awesome
+pacman -S xorg xorg-xinit qtile alacritty picom starship chromium slock neomutt rofi pip neomutt dunst ueberzug mpv freerdp spotifyd xfce4-power-manager python-pip chromium thunar lxappearance papirus-icon-theme ttf-font-awesome ttf-fira-code ttf-firacode-nerd
 echo "Main packages installed..."
 
 # ------------------------------------------------------
