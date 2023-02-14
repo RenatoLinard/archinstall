@@ -21,33 +21,39 @@ lsblk
 
 # Create partitions
 gdisk /dev/sda
-1: +300M ef00
-2: +2G 8200
-3: Rest 8300
+1: +512M ef00
+c: BOOT
+2: Rest 8300
+c: ROOT
 Write: w, Confirm with Y
 
 # Format partitions
-mkfs.fat -F32 /dev/sda1
-mkswap /dev/sda2
-swapon /dev/sda2
-mkfs.btrfs /dev/sda3
+mkfs.vfat -n BOOT /dev/sda1
+mkfs.btrfs -L ROOT /dev/sda3
 
 # Mount points for btrfs
 mount /dev/sda3 /mnt
 btrfs su cr /mnt/@
+btrfs su cr /mnt/@cache
 btrfs su cr /mnt/@home
+btrfs su cr /mns/@images
 btrfs su cr /mnt/@snapshots
-btrfs su cr /mnt/@var_log
+btrfs su cr /mnt/@log
 umount /mnt
-mount -o noatime,compress=lzo,space_cache=v2,subvol=@ /dev/sda3 /mnt
-mkdir -p /mnt/{boot,home,.snapshots,var_log}
-mount -o noatime,compress=lzo,space_cache=v2,subvol=@home /dev/sda3 /mnt/home
-mount -o noatime,compress=lzo,space_cache=v2,subvol=@snapshots /dev/sda3 /mnt/.snapshots
-mount -o noatime,compress=lzo,space_cache=v2,subvol=@var_log /dev/sda3 /mnt/var_log
-mount /dev/sda1 /mnt/boot
+
+mount -o compress=zstd:1,noatime,subvol=@ /dev/sda2 /mnt
+mkdir -p /mnt/{boot/efi,home,.snapshots,var/{cache,log,lib/libvirt/images}}
+
+mount -o compress=zstd:1,noatime,subvol=@cache /dev/sda2 /mnt/var/cache
+mount -o compress=zstd:1,noatime,subvol=@home /dev/sda2 /mnt/home
+mount -o compress=zstd:1,noatime,subvol=@images /dev/sda2 /mnt/var/lib/libvirt/images
+mount -o compress=zstd:1,noatime,subvol=@log /dev/sda2 /mnt/var/log
+mount -o compress=zstd:1,noatime,subvol=@snapshots /dev/sda2 /mnt/.snapshots
+
+mount /dev/sda1 /mnt/boot/efi
 
 # Install base packages
-pacstrap /mnt base linux linux-firmware vim amd-ucode
+pacstrap -K /mnt base base-devel git linux linux-firmware vim openssh reflector rsync amd-ucode
 
 # Generate fstab
 genfstab -U /mnt >> /mnt/etc/fstab
