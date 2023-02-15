@@ -14,7 +14,7 @@ echo "START QTILE INSTALLATION..."
 # Install required packages
 # ------------------------------------------------------
 echo "-> Install main packages"
-pacman -S qtile alacritty nitrogen picom starship chromium slock neomutt rofi dunst ueberzug mpv freerdp spotifyd xfce4-power-manager python-pip chromium thunar lxappearance papirus-icon-theme ttf-font-awesome gvfs exa bat ttf-fira-code ttf-firacode-nerd neofetch grub-btrfs
+pacman -S qtile alacritty nitrogen picom starship chromium slock neomutt rofi dunst ueberzug mpv freerdp spotifyd xfce4-power-manager python-pip chromium thunar lxappearance papirus-icon-theme ttf-font-awesome gvfs exa bat ttf-fira-sans ttf-fira-code ttf-firacode-nerd neofetch grub-btrfs
 echo "Main packages installed..."
 sleep 3
 
