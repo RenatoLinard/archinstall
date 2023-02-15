@@ -1,14 +1,17 @@
 # Load keyboard layout
-loadkeys de
+# loadkeys de
 
 # Connect to WLAN (if not LAN)
-iwctl --passphrase 22036727328731084417 station wlan0 connect WLAN-381152
+# iwctl --passphrase 22036727328731084417 station wlan0 connect WLAN-381152
+
+# Install git
+# pacman -S git
+
+# Clone archinstall
+git clone https://gitlab.com/stephan.raabe/archinstall.git
 
 # Check internet connection
 # ping -c4 www.google.de
-
-# Install Arch
-archinstall
 
 # Sync time
 timedatectl set-ntp true
