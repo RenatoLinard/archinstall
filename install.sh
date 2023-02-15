@@ -1,8 +1,23 @@
+#!/bin/bash
+
+# -----------------------------------------------------
+# Arch Base Install Script 
+# btrfs
+# IMPORTANT: chmod +x install.sh
+# -----------------------------------------------------
+
+# -----------------------------------------------------
+# Required manual steps
+# -----------------------------------------------------
+
 # Load keyboard layout
 # loadkeys de
 
 # Connect to WLAN (if not LAN)
 # iwctl --passphrase 22036727328731084417 station wlan0 connect WLAN-381152
+
+# Check internet connection
+# ping -c4 www.google.de
 
 # Check partitions
 # lsblk
@@ -20,11 +35,9 @@ sda2="sda2"
 # Install git
 # pacman -S git
 
-# Clone archinstall
-git clone https://gitlab.com/stephan.raabe/archinstall.git
-
-# Check internet connection
-# ping -c4 www.google.de
+# -----------------------------------------------------
+# Start script
+# -----------------------------------------------------
 
 # Sync time
 echo "Sync time"
