@@ -16,6 +16,7 @@ echo "START QTILE INSTALLATION..."
 echo "-> Install main packages"
 pacman -S xorg xorg-xinit qtile alacritty picom starship chromium slock neomutt rofi pip dunst ueberzug mpv freerdp spotifyd xfce4-power-manager python-pip chromium thunar lxappearance papirus-icon-theme ttf-font-awesome ttf-fira-code ttf-firacode-nerd
 echo "Main packages installed..."
+sleep 3
 
 # ------------------------------------------------------
 # Install required packages
@@ -23,12 +24,13 @@ echo "Main packages installed..."
 echo "-> Install AUR packages"
 yay -S pywal 
 echo "AUR packages installed..."
+sleep 3
 
 # ------------------------------------------------------
 # Install Pip packages
 # ------------------------------------------------------
 echo "-> Install Pip packages"
-pip install openai psutil
+pip install psutil
 echo "Pip packages installed"
 
 # ------------------------------------------------------

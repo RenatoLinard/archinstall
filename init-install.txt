@@ -5,7 +5,10 @@ loadkeys de
 iwctl --passphrase 22036727328731084417 station wlan0 connect WLAN-381152
 
 # Check internet connection
-ping -c4 www.google.de
+# ping -c4 www.google.de
+
+# Install Arch
+archinstall
 
 # Sync time
 timedatectl set-ntp true
@@ -66,14 +69,74 @@ git clone https://gitlab.com/stephan.raabe/archinstall.git
 
 # Add btrfs to mkinitcpio
 vim /etc/mkinitcpio.conf
-MODULES=(btrfs)
+BINARIES=(btrfs)
 mkinitcpio -p linux
 
-# Install grub
-grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB --removable
-grub-mkconfig -o /boot/grub/grub.cfg
+# Install Snapper Support
+yay -S snapper-support
+sudo -s
+cd /
+umount /.snapshots
+rm -r /.snapshots
+snapper -c root create-config /
+btrfs subvol list /
+btrfs subvolume delete /.snapshots
+mkdir /.snapshots
+mount -a
+btrfs subvol get-default /
+btrfs subvol list /
+btrfs subvol set-def 256 /
+btrfs subvol get-default /
+snapper ls
 
-sudo vim /etc/sudoers
+# Edit Snapper Config
+vim /etc/snapper/configs/root
+ALLOW_GROUPS="wheel"
+TIMELINE_CREATE="no"
+5,5,0,0,0
+chown -R :wheel /.snapshots
+exit
+snapper ls
+
+# Create first snapshot
+sudo -s
+cd /
+snapper -c root create -d "*** System installed ***"
+snapper ls
+systemctl status grub-btrfs-snapper.service
+exit
+
+# Install zram
+yay -S zram-generator
+sudo vim /etc/systemd/zram-generator.conf
+Add
+[zram0]
+zram-size = ram / 2
+
+sudo systemctl daemon-reload
+sudo systemctl start /dev/zram0
+reboot
+free -h
+
+# Install duf
+yay -S duf
+duf
+
+# Rollback
+sudo -s
+snapper ls
+mount -t btrfs -o subvol=/ /dev/sda2 /mnt
+cd /mnt
+ls
+cd @
+ls
+rm -fr *
+btrfs subvolume delete /mnt/@
+
+btrfs subvolume snapshot /mnt/@snapshots/1/snapshot /mnt/@
+umount /mnt
+
+
 
 exit
 umount -a
