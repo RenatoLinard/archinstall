@@ -7,11 +7,7 @@
 
 echo "START YAY INSTALLATION..."
 
-sudo git clone https://aur.archlinux.org/yay-git.git
-sudo chown -R raabe:raabe ./yay-git
-
-echo "The following manual steps are required:"
-echo "cd yay-git/"
-echo "makepkg -si"
-
+git clone https://aur.archlinux.org/yay-git.git
+cd yay-git
+makepkg -si
 echo "DONE!"
