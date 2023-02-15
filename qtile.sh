@@ -14,7 +14,7 @@ echo "START QTILE INSTALLATION..."
 # Install required packages
 # ------------------------------------------------------
 echo "-> Install main packages"
-pacman -S xorg-xinit qtile alacritty nitrogen picom starship chromium slock neomutt rofi dunst ueberzug mpv freerdp spotifyd xfce4-power-manager python-pip chromium thunar lxappearance papirus-icon-theme ttf-font-awesome exa bat ttf-fira-code ttf-firacode-nerd neofetch grub-btrfs
+pacman -S qtile alacritty nitrogen picom starship chromium slock neomutt rofi dunst ueberzug mpv freerdp spotifyd xfce4-power-manager python-pip chromium thunar lxappearance papirus-icon-theme ttf-font-awesome exa bat ttf-fira-code ttf-firacode-nerd neofetch grub-btrfs
 echo "Main packages installed..."
 sleep 3
 
@@ -22,7 +22,7 @@ sleep 3
 # Install required packages
 # ------------------------------------------------------
 echo "-> Install AUR packages"
-yay -S pywal timeshift 
+yay -S pywal timeshift adwaita-dark 
 echo "AUR packages installed..."
 sleep 3
 
