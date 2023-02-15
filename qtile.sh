@@ -14,7 +14,7 @@ echo "START QTILE INSTALLATION..."
 # Install required packages
 # ------------------------------------------------------
 echo "-> Install main packages"
-pacman -S xorg xorg-xinit qtile alacritty picom starship chromium slock neomutt rofi pip dunst ueberzug mpv freerdp spotifyd xfce4-power-manager python-pip chromium thunar lxappearance papirus-icon-theme ttf-font-awesome ttf-fira-code ttf-firacode-nerd
+pacman -S xorg-xinit qtile alacritty nitrogen picom starship chromium slock neomutt rofi dunst ueberzug mpv freerdp spotifyd xfce4-power-manager python-pip chromium thunar lxappearance papirus-icon-theme ttf-font-awesome exa bat ttf-fira-code ttf-firacode-nerd neofetch grub-btrfs
 echo "Main packages installed..."
 sleep 3
 
@@ -22,7 +22,7 @@ sleep 3
 # Install required packages
 # ------------------------------------------------------
 echo "-> Install AUR packages"
-yay -S pywal 
+yay -S pywal timeshift 
 echo "AUR packages installed..."
 sleep 3
 
@@ -45,20 +45,20 @@ chmod +x /home/$(whoami)/dotfiles/gitpush.sh
 # Create symbolic links
 # ------------------------------------------------------
 echo "-> Create symbolic links"
-mkdir /home/$(whoami)/.config
-ln -s /home/$(whoami)/dotfiles/qtile/ ~/.config
-ln -s /home/$(whoami)/dotfiles/alacritty/ ~/.config
-ln -s /home/$(whoami)/dotfiles/neomutt/ ~/.config
-ln -s /home/$(whoami)/dotfiles/picom/ ~/.config
-ln -s /home/$(whoami)/dotfiles/ranger/ ~/.config
-ln -s /home/$(whoami)/dotfiles/rofi/ ~/.config
-ln -s /home/$(whoami)/dotfiles/spotifyd/ ~/.config
-ln -s /home/$(whoami)/dotfiles/vim/ ~/.config
-rm /home/($whoami)/.bashrc
-ln -s /home/$(whoami)/dotfiles/.bashrc ~/.bashrc
-rm /home/$(whoami)/.xinitrc
-ln -s /home/$(whoami)/dotfiles/.xinitrc ~/.xinitrc
-ln -s /home/$(whoami)/dotfiles/starship/starship.toml ~/.config/starship.toml
+mkdir ~/.config
+ln -s ~/dotfiles/qtile/ ~/.config
+ln -s ~/dotfiles/alacritty/ ~/.config
+ln -s ~/dotfiles/neomutt/ ~/.config
+ln -s ~/dotfiles/picom/ ~/.config
+ln -s ~/dotfiles/ranger/ ~/.config
+ln -s ~/dotfiles/rofi/ ~/.config
+ln -s ~/dotfiles/spotifyd/ ~/.config
+ln -s ~/dotfiles/vim/ ~/.config
+rm ~/.bashrc
+ln -s ~/dotfiles/.bashrc ~/.bashrc
+rm ~/.xinitrc
+ln -s ~/dotfiles/.xinitrc ~/.xinitrc
+ln -s ~/dotfiles/starship/starship.toml ~/.config/starship.toml
 echo "Symbolic links created..."
 
 # ------------------------------------------------------
@@ -71,7 +71,7 @@ echo "wallpapers cloned into home directory"
 # ------------------------------------------------------
 # Init pywal
 # ------------------------------------------------------
-wal -i ~/wallpaper/default.jpg
+# wal -i ~/wallpaper/default.jpg
 
 # ------------------------------------------------------
 # Install startship plain text 
