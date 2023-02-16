@@ -136,6 +136,14 @@ sleep 3
 echo "DONE."
 
 # ------------------------------------------------------
+# Generate fstab
+# ------------------------------------------------------
+read -p "Do you want to generate fstab?" c
+genfstab -U /mnt >> /mnt/etc/fstab
+cat /mnt/etc/fstab
+echo "DONE."
+
+# ------------------------------------------------------
 # Change to installed sytem
 # ------------------------------------------------------
 read -p "Do you want to switch to the installation? You have to clone the installer again." c

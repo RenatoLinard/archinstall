@@ -17,14 +17,6 @@ read -p "Do you want to start? " s
 echo "START ARCH INSTALLATION..."
 
 # ------------------------------------------------------
-# Generate fstab
-# ------------------------------------------------------
-read -p "Do you want to generate fstab?" c
-genfstab -U /mnt >> /mnt/etc/fstab
-cat /mnt/etc/fstab
-echo "DONE."
-
-# ------------------------------------------------------
 # Set System Time
 # ------------------------------------------------------
 echo "-> Set system time"
@@ -144,7 +136,7 @@ read -p "Do you want to continue?" c
 # ------------------------------------------------------
 echo "Manual step required!"
 echo "Add btrfs to binaries: BINARIES=(btrfs)"
-vim /etc/mkinitcpio.conf
+sudo vim /etc/mkinitcpio.conf
 echo "Start mkinitcpio -p linux"
 mkinitcpio -p linux
 
@@ -154,10 +146,6 @@ mkinitcpio -p linux
 echo "Manual step required!"
 echo "Uncommend wheel: BINARIES=(btrfs)"
 sudo vim /etc/sudoers
-
-vim /etc/mkinitcpio.conf
-echo "Start mkinitcpio -p linux"
-mkinitcpio -p linux
 usermod -aG wheel $my_user
 
 #exit
