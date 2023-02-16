@@ -11,6 +11,7 @@
 # -----------------------------------------------------
 
 # Load keyboard layout
+# loadkeys de
 # loadkeys de-latin1
 
 # Connect to WLAN (if not LAN)
@@ -37,7 +38,7 @@
 # pacman -S git
 
 # Clone Installation
-https://gitlab.com/stephan.raabe/archinstall.git
+# git clone https://gitlab.com/stephan.raabe/archinstall.git
 
 # -----------------------------------------------------
 # Start script
