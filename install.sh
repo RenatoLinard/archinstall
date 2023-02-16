@@ -11,7 +11,7 @@
 # -----------------------------------------------------
 
 # Load keyboard layout
-# loadkeys de
+# loadkeys de-latin1
 
 # Connect to WLAN (if not LAN)
 # iwctl --passphrase 22036727328731084417 station wlan0 connect WLAN-381152
@@ -28,8 +28,16 @@
 # 2: Rest 8300 -> c: ROOT
 # Write w, Confirm Y
 
+# Sync package
+
+# Pacman sync packages
+# pacman -Syy
+
 # Install git
 # pacman -S git
+
+# Clone Installation
+https://gitlab.com/stephan.raabe/archinstall.git
 
 # -----------------------------------------------------
 # Start script
@@ -55,12 +63,6 @@ sleep 3
 # Reflector setup
 echo "Set refelctor"
 reflector -c Germany -a 6 --sort rate --save /etc/pacman.d/mirrorlist
-echo "DONE."
-sleep 3
-
-# Pacman sync
-echo "Update packages"
-pacman -Syy
 echo "DONE."
 sleep 3
 
