@@ -12,8 +12,6 @@
 # ------------------------------------------------------
 myuser="MYUSER"
 mypassword="MYPASS"
-mywifi="WLAN-381152"
-mywifipassword="22036727328731084417"
 
 read -p "Do you want to start? " s
 echo "START ARCH INSTALLATION..."
@@ -119,17 +117,9 @@ systemctl enable acpid
 echo "Services enabled"
 sleep 3
 
-# ------------------------------------------------------
-# setup wifi 
-# ------------------------------------------------------
-# nmcli device wifi connect $mywifi password $mywifipassword
-# Manual configuration possible with nmtui
-# sleep 3
-
 echo "export VISUAL=vim"
 echo "visudo /etc/sudoers"
 echo "Uncomment #wheel..."
 echo "usermod -aG wheel $my_user"
 
-echo "Activate WIFI after the reboot with nmtui."
-echo "DONE! You can reboot the system now..."
+echo "DONE!"
