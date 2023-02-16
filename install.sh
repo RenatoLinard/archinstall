@@ -126,6 +126,21 @@ readm -p "Do you want to start archinstall?" c
 cd archinstall
 sh ./archinstall.sh
 
+# ------------------------------------------------------
+# Install GRUB
+# ------------------------------------------------------
+# Confirm grub installation
+read -p "Do you want to clone the archinstall script?" c
+echo "Waiting 5 sec to start..."
+sleep 5
+
+echo "-> Install GRUB"
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=ARCHLINUX
+grub-mkconfig -o /boot/grub/grub.cfg
+echo "GRUB installed..."
+sleep 3
+read -p "Do you want to continue?" c
+
 # Add btrfs to mkinitcpio
 echo "Manual step required!"
 echo "Add btrfs to binaries: BINARIES=(btrfs)"
