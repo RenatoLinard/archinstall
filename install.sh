@@ -128,21 +128,12 @@ genfstab -U /mnt >> /mnt/etc/fstab
 cat /mnt/etc/fstab
 echo "DONE."
 
-# Confirm the cloning of archinstall script
-read -p "Do you want to clone the archinstall script?" c
-
-# Clone archinstall
-git clone https://gitlab.com/stephan.raabe/archinstall.git
-echo "DONE."
-
 # Start archinstall
-readm -p "Do you want to start archinstall?" c
-cd archinstall
+readm -p "Do you want to start the archinstall script?" c
 sh ./archinstall.sh
-echo "DONE."
 
 # Confirm grub installation
-read -p "Do you want to clone the archinstall script?" c
+read -p "Do you want to install grub now?" c
 echo "Waiting 5 sec to start..."
 sleep 5
 
@@ -162,4 +153,4 @@ mkinitcpio -p linux
 
 #exit
 echo "DONE! Please exit, umount -a & reboot"
-
+echo "Activate WIFI after reboot with nmtui."
