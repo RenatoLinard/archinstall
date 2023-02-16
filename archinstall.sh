@@ -17,6 +17,14 @@ read -p "Do you want to start? " s
 echo "START ARCH INSTALLATION..."
 
 # ------------------------------------------------------
+# Generate fstab
+# ------------------------------------------------------
+read -p "Do you want to generate fstab?" c
+genfstab -U /mnt >> /mnt/etc/fstab
+cat /mnt/etc/fstab
+echo "DONE."
+
+# ------------------------------------------------------
 # Set System Time
 # ------------------------------------------------------
 echo "-> Set system time"
@@ -117,9 +125,41 @@ systemctl enable acpid
 echo "Services enabled"
 sleep 3
 
-echo "export VISUAL=vim"
-echo "visudo /etc/sudoers"
-echo "Uncomment #wheel..."
-echo "usermod -aG wheel $my_user"
+# ------------------------------------------------------
+# Confirm grub installation
+# ------------------------------------------------------
+read -p "Do you want to install grub now?" c
+echo "Waiting 5 sec to start..."
+sleep 5
 
-echo "DONE!"
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=ARCHLINUX
+grub-mkconfig -o /boot/grub/grub.cfg
+echo "DONE."
+sleep 3
+
+read -p "Do you want to continue?" c
+
+# ------------------------------------------------------
+# Add btrfs to mkinitcpio
+# ------------------------------------------------------
+echo "Manual step required!"
+echo "Add btrfs to binaries: BINARIES=(btrfs)"
+vim /etc/mkinitcpio.conf
+echo "Start mkinitcpio -p linux"
+mkinitcpio -p linux
+
+# ------------------------------------------------------
+# Add user to wheel
+# ------------------------------------------------------
+echo "Manual step required!"
+echo "Uncommend wheel: BINARIES=(btrfs)"
+sudo vim /etc/sudoers
+
+vim /etc/mkinitcpio.conf
+echo "Start mkinitcpio -p linux"
+mkinitcpio -p linux
+usermod -aG wheel $my_user
+
+#exit
+echo "DONE! Please exit, umount -a & reboot"
+echo "Activate WIFI after reboot with nmtui."

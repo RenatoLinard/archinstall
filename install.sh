@@ -51,39 +51,53 @@ sda2="sda2"
 # sda1="sda1"
 # sda2="sda2"
 
+# ------------------------------------------------------
 # Confirm Start
+# ------------------------------------------------------
 read -p "Do you want to start the installation?" c
 
+# ------------------------------------------------------
 # Sync time
+# ------------------------------------------------------
 echo "Sync time"
 timedatectl set-ntp true
 echo "DONE."
 sleep 3
 
+# ------------------------------------------------------
 # Reflector setup
-echo "Set refelctor"
+# ------------------------------------------------------
+echo "Set reflector"
 reflector -c Germany -a 6 --sort rate --save /etc/pacman.d/mirrorlist
 echo "DONE."
 sleep 3
 
+# ------------------------------------------------------
 # Confirm format of partitions
+# ------------------------------------------------------
 read -p "Do you want to format the partitions?" c
 echo "Waiting 5 sec to start..."
 sleep 5
 
+# ------------------------------------------------------
 # Format partitions
+# ------------------------------------------------------
 echo "Format partitions"
 mkfs.vfat -n BOOT /dev/$sda1
 mkfs.btrfs -L ROOT /dev/$sda2
 lsblk
 echo "DONE."
 
+# ------------------------------------------------------
 # Confirm the creation of btrfs subvolumes
+# ------------------------------------------------------
 read -p "Do you want to create the btrfs subvolumes?" c
 echo "Waiting 5 sec to start..."
 sleep 5
 
+# ------------------------------------------------------
 # Mount points for btrfs
+# ------------------------------------------------------
 echo "Create Subvolumes"
 mount /dev/$sda2 /mnt
 btrfs su cr /mnt/@
@@ -94,7 +108,9 @@ btrfs su cr /mnt/@log
 umount /mnt
 echo "DONE."
 
+# ------------------------------------------------------
 # Confirm the mount of drives
+# ------------------------------------------------------
 read -p "Do you want to mount all drives and subvolumnes?" c
 echo "Waiting 5 sec to start..."
 sleep 5
@@ -110,49 +126,17 @@ mount /dev/$sda1 /mnt/boot/efi
 lsblk
 echo "DONE."
 
-read -p "Do you want to install the base packages?" c
-
+# ------------------------------------------------------
 # Install base packages
+# ------------------------------------------------------
+read -p "Do you want to install the base packages?" c
 echo "Install base packages"
 pacstrap -K /mnt base base-devel git linux linux-firmware vim openssh reflector rsync amd-ucode
 sleep 3
 echo "DONE."
 
+# ------------------------------------------------------
 # Change to installed sytem
-read -p "Do you want to switch to the installation?" c
-echo "Change to installed system"
+# ------------------------------------------------------
+read -p "Do you want to switch to the installation? You have to clone the installer again." c
 arch-chroot /mnt
-echo "DONE."
-
-# Generate fstab
-read -p "Do you want to generate fstab?" c
-genfstab -U /mnt >> /mnt/etc/fstab
-cat /mnt/etc/fstab
-echo "DONE."
-
-# Start archinstall
-readm -p "Do you want to start the archinstall script?" c
-sh ./archinstall.sh
-
-# Confirm grub installation
-read -p "Do you want to install grub now?" c
-echo "Waiting 5 sec to start..."
-sleep 5
-
-grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=ARCHLINUX
-grub-mkconfig -o /boot/grub/grub.cfg
-echo "DONE."
-sleep 3
-
-read -p "Do you want to continue?" c
-
-# Add btrfs to mkinitcpio
-echo "Manual step required!"
-echo "Add btrfs to binaries: BINARIES=(btrfs)"
-vim /etc/mkinitcpio.conf
-echo "Start mkinitcpio -p linux"
-mkinitcpio -p linux
-
-#exit
-echo "DONE! Please exit, umount -a & reboot"
-echo "Activate WIFI after reboot with nmtui."
