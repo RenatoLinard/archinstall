@@ -63,7 +63,6 @@ read -p "Do you want to start the installation?" c
 echo "Sync time"
 timedatectl set-ntp true
 echo "DONE."
-sleep 3
 
 # ------------------------------------------------------
 # Reflector setup
@@ -71,21 +70,20 @@ sleep 3
 echo "Set reflector"
 reflector -c Germany -a 6 --sort rate --save /etc/pacman.d/mirrorlist
 echo "DONE."
-sleep 3
 
 # ------------------------------------------------------
 # Confirm format of partitions
 # ------------------------------------------------------
 read -p "Do you want to format the partitions?" c
-echo "Waiting 5 sec to start..."
-sleep 5
+echo "Waiting 3 sec to start..."
+sleep 3
 
 # ------------------------------------------------------
 # Format partitions
 # ------------------------------------------------------
 echo "Format partitions"
-mkfs.vfat -n BOOT /dev/$sda1
-mkfs.btrfs -L ROOT /dev/$sda2
+mkfs.fat -F 32 /dev/$sda1
+mkfs.btrfs -f /dev/$sda2
 lsblk
 echo "DONE."
 
@@ -93,13 +91,12 @@ echo "DONE."
 # Confirm the creation of btrfs subvolumes
 # ------------------------------------------------------
 read -p "Do you want to create the btrfs subvolumes?" c
-echo "Waiting 5 sec to start..."
-sleep 5
+echo "Waiting 3 sec to start..."
+sleep 3
 
 # ------------------------------------------------------
 # Mount points for btrfs
 # ------------------------------------------------------
-echo "Create Subvolumes"
 mount /dev/$sda2 /mnt
 btrfs su cr /mnt/@
 btrfs su cr /mnt/@cache
@@ -113,10 +110,9 @@ echo "DONE."
 # Confirm the mount of drives
 # ------------------------------------------------------
 read -p "Do you want to mount all drives and subvolumnes?" c
-echo "Waiting 5 sec to start..."
-sleep 5
+echo "Waiting 3 sec to start..."
+sleep 3
 
-echo "Mount subvolumes"
 mount -o compress=zstd:1,noatime,subvol=@ /dev/$sda2 /mnt
 mkdir -p /mnt/{boot/efi,home,.snapshots,var/{cache,log,lib/libvirt/images}}
 mount -o compress=zstd:1,noatime,subvol=@cache /dev/$sda2 /mnt/var/cache
@@ -133,7 +129,6 @@ echo "DONE."
 read -p "Do you want to install the base packages?" c
 echo "Install base packages"
 pacstrap -K /mnt base base-devel git linux linux-firmware vim openssh reflector rsync amd-ucode
-sleep 3
 echo "DONE."
 
 # ------------------------------------------------------
