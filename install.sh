@@ -22,10 +22,6 @@
 # Check partitions
 # lsblk
 
-# Set drives
-sda1="sda1"
-sda2="sda2"
-
 # Create partitions
 # gdisk /dev/sda
 # 1: +512M ef00 -> c: BOOT
@@ -38,6 +34,13 @@ sda2="sda2"
 # -----------------------------------------------------
 # Start script
 # -----------------------------------------------------
+
+# Set drives
+sda1="sda1"
+sda2="sda2"
+
+# Confirm Start
+read -p "Do you want to start the installation?" c
 
 # Sync time
 echo "Sync time"
@@ -54,11 +57,21 @@ echo "Update packages"
 pacman -Syy
 sleep 3
 
+# Confirm format of partitions
+read -p "Do you want to format the partitions?" c
+echo "Waiting 5 sec to start..."
+sleep 5
+
 # Format partitions
 echo "Format partitions"
 mkfs.vfat -n BOOT /dev/$sda1
 mkfs.btrfs -L ROOT /dev/$sda2
-sleep 3
+lsblk
+
+# Confirm the creation of btrfs subvolumes
+read -p "Do you want to create the btrfs subvolumes?" c
+echo "Waiting 5 sec to start..."
+sleep 5
 
 # Mount points for btrfs
 echo "Create Subvolumes"
@@ -69,7 +82,11 @@ btrfs su cr /mnt/@home
 btrfs su cr /mnt/@snapshots
 btrfs su cr /mnt/@log
 umount /mnt
-sleep 3
+
+# Confirm the mount of drives
+read -p "Do you want to mount all drives and subvolumnes?" c
+echo "Waiting 5 sec to start..."
+sleep 5
 
 echo "Mount subvolumes"
 mount -o compress=zstd:1,noatime,subvol=@ /dev/$sda2 /mnt
@@ -79,7 +96,7 @@ mount -o compress=zstd:1,noatime,subvol=@home /dev/$sda2 /mnt/home
 mount -o compress=zstd:1,noatime,subvol=@log /dev/$sda2 /mnt/var/log
 mount -o compress=zstd:1,noatime,subvol=@snapshots /dev/$sda2 /mnt/.snapshots
 mount /dev/$sda1 /mnt/boot/efi
-sleep 3
+lsblk
 
 read -p "Do you want to install the base packages?" c
 
@@ -96,6 +113,10 @@ arch-chroot /mnt
 # Generate fstab
 read -p "Do you want to generate fstab?" c
 genfstab -U /mnt >> /mnt/etc/fstab
+cat /mnt/etc/fstab
+
+# Confirm the cloning of archinstall script
+read -p "Do you want to clone the archinstall script?" c
 
 # Clone archinstall
 git clone https://gitlab.com/stephan.raabe/archinstall.git
