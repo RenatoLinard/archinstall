@@ -80,7 +80,7 @@ sleep 3
 # Install Packages
 # ------------------------------------------------------
 echo "-> Install packages"
-pacman -S grub efibootmgr networkmanager network-manager-applet dialog wpa_supplicant mtools dosfstools base-devel linux-headers avahi xdg-user-dirs xdg-utils gvfs gvfs-smb nfs-utils inetutils dnsutils bluez bluez-utils cups hplip alsa-utils pipewire pipewire-alsa pipewire-pulse pipewire-jack bash-completion openssh rsync reflector acpi acpi_call dnsmasq vde2 openbsd-netcat iptables-nft ipset firewalld flatpak sof-firmware nss-mdns acpid os-prober ntfs-3g terminus-font exa bat htop ranger unzip neofetch
+pacman -S grub efibootmgr networkmanager network-manager-applet dialog wpa_supplicant mtools dosfstools base-devel linux-headers avahi xdg-user-dirs xdg-utils gvfs gvfs-smb nfs-utils inetutils dnsutils bluez bluez-utils cups hplip alsa-utils pipewire pipewire-alsa pipewire-pulse pipewire-jack bash-completion openssh rsync reflector acpi acpi_call dnsmasq vde2 openbsd-netcat iptables-nft ipset firewalld flatpak sof-firmware nss-mdns acpid os-prober ntfs-3g terminus-font exa bat htop ranger unzip neofetch duf
 echo "base packages installed..."
 sleep 3
 
@@ -101,15 +101,6 @@ useradd -m $myuser
 echo raabe:$mypassword | chpasswd
 echo "raabe ALL=(ALL) ALL" >> /etc/sudoers.d/$myuser
 echo "raabe added as new user with sudo priviliges..."
-sleep 3
-
-# ------------------------------------------------------
-# Install GRUB
-# ------------------------------------------------------
-echo "-> Install GRUB"
-grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=ARCHLINUX
-grub-mkconfig -o /boot/grub/grub.cfg
-echo "GRUB installed..."
 sleep 3
 
 # ------------------------------------------------------
