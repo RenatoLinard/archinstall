@@ -127,43 +127,11 @@ cd archinstall
 sh ./archinstall.sh
 
 # Add btrfs to mkinitcpio
-#vim /etc/mkinitcpio.conf
-#BINARIES=(btrfs)
-#mkinitcpio -p linux
-
-# Install Snapper Support
-#yay -S snapper-support
-#sudo -s
-#cd /
-#umount /.snapshots
-#rm -r /.snapshots
-#snapper -c root create-config /
-#btrfs subvol list /
-#btrfs subvolume delete /.snapshots
-#mkdir /.snapshots
-#mount -a
-#btrfs subvol get-default /
-#btrfs subvol list /
-#btrfs subvol set-def 256 /
-#btrfs subvol get-default /
-#snapper ls
-
-# Edit Snapper Config
-#vim /etc/snapper/configs/root
-#ALLOW_GROUPS="wheel"
-#TIMELINE_CREATE="no"
-#5,5,0,0,0
-#chown -R :wheel /.snapshots
-#exit
-#snapper ls
-
-# Create first snapshot
-#sudo -s
-#cd /
-#snapper -c root create -d "*** System installed ***"
-#snapper ls
-#systemctl status grub-btrfs-snapper.service
-#exit
+echo "Manual step required!"
+echo "Add btrfs to binaries: BINARIES=(btrfs)"
+vim /etc/mkinitcpio.conf
+echo "Start mkinitcpio -p linux"
+mkinitcpio -p linux
 
 # Install zram
 #yay -S zram-generator
@@ -177,27 +145,6 @@ sh ./archinstall.sh
 #reboot
 #free -h
 
-# Install duf
-#yay -S duf
-#duf
-
-# Rollback
-#sudo -s
-#snapper ls
-#mount -t btrfs -o subvol=/ /dev/sda2 /mnt
-#cd /mnt
-#ls
-#cd @
-#ls
-#rm -fr *
-#btrfs subvolume delete /mnt/@
-
-#btrfs subvolume snapshot /mnt/@snapshots/1/snapshot /mnt/@
-#umount /mnt
-
-
-
 #exit
-#umount -a
-#reboot
+echo "DONE! Please exit, umount -a & reboot"
 
