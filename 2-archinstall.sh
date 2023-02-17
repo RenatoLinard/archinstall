@@ -129,7 +129,7 @@ mkinitcpio -p linux
 echo "-> Manual step required!"
 echo "Uncomment wheel in sudoers"
 read -p "Open sudoers now?" c
-sudo vim /etc/sudoers
+EDITOR=vim sudo -E visudo
 usermod -aG wheel $myuser
 
 echo "-> DONE! Please exit, umount -a & reboot"
