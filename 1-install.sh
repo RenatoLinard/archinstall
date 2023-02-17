@@ -36,7 +36,7 @@
 # pacman -S git
 
 # Clone Installation
-# git clone https://gitlab.com/stephan.raabe/archinstall.git
+# git clone https://gitlab.com/stephan-raabe/archinstall.git
 
 # -----------------------------------------------------
 # Start script in folder /archinstall with ./1-install.sh
