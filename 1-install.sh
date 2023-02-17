@@ -25,8 +25,8 @@
 
 # Create partitions
 # gdisk /dev/sda
-# 1: +512M ef00 -> c: BOOT
-# 2: Rest 8300 -> c: ROOT
+# 1: +512M ef00
+# 2: Rest 8300
 # Write w, Confirm Y
 
 # Sync package
@@ -41,21 +41,24 @@
 # git clone https://gitlab.com/stephan.raabe/archinstall.git
 
 # -----------------------------------------------------
-# Start script
+# Start script in folder /archinstall with ./1-install.sh
 # -----------------------------------------------------
-
-# Set drives Laptop
-sda1="sda1"
-sda2="sda2"
-
-# Set drives Desktop
-# sda1="sda1"
-# sda2="sda2"
 
 # ------------------------------------------------------
 # Confirm Start
 # ------------------------------------------------------
-read -p "Do you want to start the installation?" c
+echo " ------------------------------------------------------"
+echo "Welcome to the arch linux install script"
+echo " ------------------------------------------------------"
+echo "Important: Please make sure that you have followed the manuel steps to partition the harddisc!"
+echo ""
+read -p "Do you want to start the installation now?" c
+
+# Show partitions
+lsblk
+echo ""
+read "Enter the name of the EFI partition: " sda1
+read "Enter the name of the ROOT partition: " sda2
 
 # ------------------------------------------------------
 # Sync time
@@ -68,15 +71,13 @@ echo "DONE."
 # Reflector setup
 # ------------------------------------------------------
 echo "Set reflector"
-reflector -c Germany -a 6 --sort rate --save /etc/pacman.d/mirrorlist
+reflector -c Germany -a 4 --sort rate --save /etc/pacman.d/mirrorlist
 echo "DONE."
 
 # ------------------------------------------------------
 # Confirm format of partitions
 # ------------------------------------------------------
 read -p "Do you want to format the partitions?" c
-echo "Waiting 3 sec to start..."
-sleep 3
 
 # ------------------------------------------------------
 # Format partitions
@@ -91,8 +92,6 @@ echo "DONE."
 # Confirm the creation of btrfs subvolumes
 # ------------------------------------------------------
 read -p "Do you want to create the btrfs subvolumes?" c
-echo "Waiting 3 sec to start..."
-sleep 3
 
 # ------------------------------------------------------
 # Mount points for btrfs
@@ -110,11 +109,9 @@ echo "DONE."
 # Confirm the mount of drives
 # ------------------------------------------------------
 read -p "Do you want to mount all drives and subvolumnes?" c
-echo "Waiting 3 sec to start..."
-sleep 3
 
 mount -o compress=zstd:1,noatime,subvol=@ /dev/$sda2 /mnt
-mkdir -p /mnt/{boot/efi,home,.snapshots,var/{cache,log,lib/libvirt/images}}
+mkdir -p /mnt/{boot/efi,home,.snapshots,var/{cache,log}}
 mount -o compress=zstd:1,noatime,subvol=@cache /dev/$sda2 /mnt/var/cache
 mount -o compress=zstd:1,noatime,subvol=@home /dev/$sda2 /mnt/home
 mount -o compress=zstd:1,noatime,subvol=@log /dev/$sda2 /mnt/var/log
@@ -127,7 +124,6 @@ echo "DONE."
 # Install base packages
 # ------------------------------------------------------
 read -p "Do you want to install the base packages?" c
-echo "Install base packages"
 pacstrap -K /mnt base base-devel git linux linux-firmware vim openssh reflector rsync amd-ucode
 echo "DONE."
 
@@ -140,7 +136,10 @@ cat /mnt/etc/fstab
 echo "DONE."
 
 # ------------------------------------------------------
-# Change to installed sytem
+# Chroot to installed sytem
 # ------------------------------------------------------
-read -p "Do you want to switch to the installation? You have to clone the installer again." c
-arch-chroot /mnt
+mkdir /mnt/archinstall
+cp 2-archinstall.sh /mnt/archinstall
+cp 3-yay.sh /mnt/archinstall
+read -p "Do you want to chroot to the installation?" c
+arch-chroot /mnt ./archinstall/2-archinstall.sh
