@@ -118,6 +118,7 @@ read -p "-> Do you want to continue?" c
 # ------------------------------------------------------
 echo "-> Manual step required!"
 echo "Add btrfs to binaries: BINARIES=(btrfs)"
+read -p "Open mkinitcpio.conf now?" c
 vim /etc/mkinitcpio.conf
 echo "Start mkinitcpio -p linux"
 mkinitcpio -p linux
@@ -127,8 +128,9 @@ mkinitcpio -p linux
 # ------------------------------------------------------
 echo "-> Manual step required!"
 echo "Uncomment wheel in sudoers"
+read -p "Open sudoers now?" c
 sudo vim /etc/sudoers
-usermod -aG wheel $my_user
+usermod -aG wheel $myuser
 
 echo "-> DONE! Please exit, umount -a & reboot"
 echo "Activate WIFI after reboot with nmtui."
