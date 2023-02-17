@@ -1,9 +1,7 @@
 #!/bin/bash
 
 # -----------------------------------------------------
-# Arch Base Install Script 
-# btrfs
-# IMPORTANT: chmod +x install.sh
+# Arch Base Install Script with btrfs
 # -----------------------------------------------------
 
 # -----------------------------------------------------
@@ -57,8 +55,8 @@ read -p "Do you want to start the installation now?" c
 # Show partitions
 lsblk
 echo ""
-read "Enter the name of the EFI partition: " sda1
-read "Enter the name of the ROOT partition: " sda2
+read -p "Enter the name of the EFI partition: " sda1
+read -p "Enter the name of the ROOT partition: " sda2
 
 # ------------------------------------------------------
 # Sync time
