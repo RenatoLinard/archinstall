@@ -1,6 +1,6 @@
-# Arch Install Script
+# Arch Install Script with btrfs for Timeshift or snapper
 
-
+This is a bash based Arch Linux installation script with EFI boot loader and btrfs partition prepared for Timeshift or snapper.
 
 ## Getting started
 
