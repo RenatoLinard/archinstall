@@ -10,7 +10,7 @@
 echo " ------------------------------------------------------"
 echo "Welcome to the arch linux install script"
 echo " ------------------------------------------------------"
-echo "Important: Please make sure that you have followed the manuel steps in the README to partition the harddisc!"
+echo "Important: Please make sure that you have followed the manual steps in the README to partition the harddisc!"
 echo ""
 read -p "Do you want to start the installation now?" c
 
