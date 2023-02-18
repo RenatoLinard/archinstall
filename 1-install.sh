@@ -8,35 +8,6 @@
 # Required manual steps
 # -----------------------------------------------------
 
-# Load keyboard layout
-# loadkeys de
-# loadkeys de-latin1
-
-# Connect to WLAN (if not LAN)
-# iwctl --passphrase 22036727328731084417 station wlan0 connect WLAN-381152
-
-# Check internet connection
-# ping -c4 www.google.de
-
-# Check partitions
-# lsblk
-
-# Create partitions
-# gdisk /dev/sda
-# 1: +512M ef00
-# 2: Rest 8300
-# Write w, Confirm Y
-
-# Sync package
-
-# Pacman sync packages
-# pacman -Syy
-
-# Install git
-# pacman -S git
-
-# Clone Installation
-# git clone https://gitlab.com/stephan-raabe/archinstall.git
 
 # -----------------------------------------------------
 # Start script in folder /archinstall with ./1-install.sh
