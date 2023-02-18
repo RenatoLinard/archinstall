@@ -42,3 +42,9 @@ cd archinstall
 
 ```
 
+## Additional information
+
+Please note that the scripts in folder /optional are not tested yet.
+
+The other scripts have been designed to support my preferred configuration of my Arch linux installation.
+
