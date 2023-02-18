@@ -2,9 +2,7 @@
 
 # ------------------------------------------------------
 # Install Script for Arch Linux
-# IMPORTANT: chmod +x archinstall.sh
-# https://www.youtube.com/watch?v=MB-cMq8QZh4
-# Wifi setup at the bottom
+# Wifi setup information at the bottom
 # ------------------------------------------------------
 
 # ------------------------------------------------------
@@ -15,22 +13,40 @@ echo "------------------------------------------------------"
 echo "START ARCH CONFIGURATION..."
 echo "------------------------------------------------------"
 echo ""
-read -p "Do you want to start? " s
+
+read -p "Enter the country for reflector (for pacman) (default: Germany): " reflector_country
+if [[ "$reflector_country" == ""]]; then
+    reflector_country = "Germany"
+fi
+
+read -p "Enter the keyboard layout (default: de-latin1): " keyboard_layout
+if [[ "$keyboard_layout" == ""]]; then
+    keyboard_layout = "de-latin1"
+fi
+
+read -p "Enter the zoneinfo (default: Europe/Berlin): " zone_info
+if [[ "$zone_info" == ""]]; then
+    zone_info = "Europe/Berlin"
+fi
+
+read -p "Enter the desired user name (no spaces and special characters): " myuser
 echo ""
-read -p "Please enter the user name (no spaces and special characters): " myuser
+
+read -p "Do you want to start? (to cancel with strg/cmd-c)" s
 echo ""
+
 # ------------------------------------------------------
 # Set System Time
 # ------------------------------------------------------
 echo "-> Set system time and sync with the internet"
-ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
+ln -sf /usr/share/zoneinfo/$zone_info /etc/localtime
 hwclock --systohc
 
 # ------------------------------------------------------
 # Update reflector
 # ------------------------------------------------------
 echo "-> Update reflector"
-reflector -c Germany -a 6 --sort rate --save /etc/pacman.d/mirrorlist
+reflector -c $reflector_country -a 6 --sort rate --save /etc/pacman.d/mirrorlist
 
 # ------------------------------------------------------
 # set lang utf8 US
@@ -44,7 +60,7 @@ echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 # Set Keyboard
 # ------------------------------------------------------
 echo "-> Set keyboard layout"
-echo "KEYMAP=de-latin1" >> /etc/vconsole.conf
+echo "KEYMAP=$keyboard_layout" >> /etc/vconsole.conf
 echo "Keyboard layout set to German..."
 
 # ------------------------------------------------------
@@ -73,13 +89,6 @@ pacman -Syy
 # ------------------------------------------------------
 echo "-> Install packages"
 pacman -S grub efibootmgr networkmanager network-manager-applet dialog wpa_supplicant mtools dosfstools base-devel linux-headers avahi xdg-user-dirs xdg-utils gvfs gvfs-smb nfs-utils inetutils dnsutils bluez bluez-utils cups hplip alsa-utils pipewire pipewire-alsa pipewire-pulse pipewire-jack bash-completion openssh rsync reflector acpi acpi_call dnsmasq openbsd-netcat ipset firewalld flatpak sof-firmware nss-mdns acpid os-prober ntfs-3g terminus-font exa bat htop ranger zip unzip neofetch duf xorg xorg-xinit grub-btrfs
-
-# ------------------------------------------------------
-# Install GPU
-# ------------------------------------------------------
-echo "-> Install GPU"
-# pacman -S --noconfirm xf86-video-amdgpu
-# pacman -S --noconfirm nvidia nvidia-utils nvidia-settings
 
 # ------------------------------------------------------
 # Add User raabe

@@ -4,22 +4,13 @@
 # Arch Base Install Script with btrfs
 # -----------------------------------------------------
 
-# -----------------------------------------------------
-# Required manual steps
-# -----------------------------------------------------
-
-
-# -----------------------------------------------------
-# Start script in folder /archinstall with ./1-install.sh
-# -----------------------------------------------------
-
 # ------------------------------------------------------
 # Confirm Start
 # ------------------------------------------------------
 echo " ------------------------------------------------------"
 echo "Welcome to the arch linux install script"
 echo " ------------------------------------------------------"
-echo "Important: Please make sure that you have followed the manuel steps to partition the harddisc!"
+echo "Important: Please make sure that you have followed the manuel steps in the README to partition the harddisc!"
 echo ""
 read -p "Do you want to start the installation now?" c
 
