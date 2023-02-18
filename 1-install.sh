@@ -17,8 +17,8 @@ read -p "Do you want to start the installation now?" c
 # Show partitions
 lsblk
 echo ""
-read -p "Enter the name of the EFI partition: " sda1
-read -p "Enter the name of the ROOT partition: " sda2
+read -p "Enter the name of the EFI partition (eg. sda1): " sda1
+read -p "Enter the name of the ROOT partition (eg. sda2): " sda2
 
 # ------------------------------------------------------
 # Sync time
