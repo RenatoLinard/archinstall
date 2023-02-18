@@ -4,7 +4,10 @@ This is a bash based Arch Linux installation script with EFI boot loader and btr
 
 ## Getting started
 
-To make it easy for you to get started, here's a list of recommended next steps.
+To make it easy for you to get started, here's a list of recommended next steps. 
+The script will ask for some information during the installation but is not performing any validation check so far.
+To get detailed information how to install Arch Linux, please visit https://wiki.archlinux.org/title/installation_guide
+
 
 ```
 # Load keyboard layout
