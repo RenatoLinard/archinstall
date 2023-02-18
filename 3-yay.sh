@@ -2,7 +2,6 @@
 
 # ------------------------------------------------------
 # Install Script for Yay
-# IMPORTANT: chmod +x yay.sh
 # ------------------------------------------------------
 
 echo "START YAY INSTALLATION..."
