@@ -102,7 +102,7 @@ echo "DONE."
 # Chroot to installed sytem
 # ------------------------------------------------------
 mkdir /mnt/archinstall
-cp 2-archinstall.sh /mnt/archinstall
-cp 3-yay.sh /mnt/archinstall
+cp 2-archinstall.sh /mnt/archinstall/setup.sh
+cp 3-yay.sh /mnt/archinstall/yay.sh
 read -p "Do you want to chroot to the installation and continue with 2-archinstall.sh to configure your arch installation?" c
-arch-chroot /mnt ./archinstall/2-archinstall.sh
+arch-chroot /mnt ./archinstall/setup.sh
