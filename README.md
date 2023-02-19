@@ -18,7 +18,7 @@ loadkeys de-latin1
 iwctl --passphrase [password] station wlan0 connect [network]
 
 # Check internet connection
-ping -c4 www.google.de
+ping -c4 www.archlinux.org
 
 # Check partitions
 lsblk
