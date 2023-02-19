@@ -46,13 +46,9 @@ read -p "Do you want to format the partitions?" c
 echo "-> Format partitions"
 mkfs.fat -F 32 /dev/$sda1
 mkfs.btrfs -f /dev/$sda2
-if [ -z "$sda3" ]; then
-    # Empty Do nothing
-else
-    read -p "Do you want to format the VM partition $sda3? (keep it empty if not required)" fvm
-    if [ -z "$fvm" ]; then
-        # Empty Do nothing
-    else
+if [ -n "$sda3" ]; then
+    read -p "Do you want to format the VM partition $sda3? (Enter yes. Keep it empty if no.)" fvm
+    if [ -n "$fvm" ]; then
         mkfs.btrfs -f /dev/$sda3
     fi
 fi
