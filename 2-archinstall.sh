@@ -143,7 +143,7 @@ usermod -aG wheel $myuser
 
 cp /archinstall/yay.sh /home/$myuser
 
-echo "-> DONE! Please exit, umount -a & reboot"
+echo "-> DONE! Please exit & reboot"
 echo "Activate WIFI after reboot with nmtui."
 echo "After successful login as user, you can install AUR helper yay with ./yay.sh"
 
