@@ -85,9 +85,7 @@ mount -o compress=zstd:1,noatime,subvol=@home /dev/$sda2 /mnt/home
 mount -o compress=zstd:1,noatime,subvol=@log /dev/$sda2 /mnt/var/log
 mount -o compress=zstd:1,noatime,subvol=@snapshots /dev/$sda2 /mnt/.snapshots
 mount /dev/$sda1 /mnt/boot/efi
-if [ -z "$sda3" ]; then
-    # Empty Do nothing
-else
+if [ -n "$sda3" ]; then
     mkdir /mnt/vm
     mount /dev/$sda3 /mnt/vm
 fi
