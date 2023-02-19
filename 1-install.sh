@@ -49,7 +49,7 @@ mkfs.btrfs -f /dev/$sda2
 if [ -z "$sda3" ]; then
     # Empty Do nothing
 else
-    read "Do you want to format the VM partition $sda3? (keep it empty if not required)" fvm
+    read -p "Do you want to format the VM partition $sda3? (keep it empty if not required)" fvm
     if [ -z "$fvm" ]; then
         # Empty Do nothing
     else
