@@ -15,18 +15,18 @@ echo "------------------------------------------------------"
 echo ""
 
 read -p "Enter the country for reflector (for pacman) (default: Germany): " reflector_country
-if [[ "$reflector_country" == ""]]; then
-    reflector_country = "Germany"
+if [ -z "$reflector_country" ]; then
+    reflector_country="Germany"
 fi
 
 read -p "Enter the keyboard layout (default: de-latin1): " keyboard_layout
-if [[ "$keyboard_layout" == ""]]; then
-    keyboard_layout = "de-latin1"
+if [ -z "$keyboard_layout" ]; then
+    keyboard_layout="de-latin1"
 fi
 
 read -p "Enter the zoneinfo (default: Europe/Berlin): " zone_info
-if [[ "$zone_info" == ""]]; then
-    zone_info = "Europe/Berlin"
+if [ -z "$zone_info" ]; then
+    zone_info="Europe/Berlin"
 fi
 
 read -p "Enter the desired user name (no spaces and special characters): " myuser
