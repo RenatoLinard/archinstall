@@ -93,7 +93,7 @@ pacman -S grub efibootmgr networkmanager network-manager-applet dialog wpa_suppl
 # ------------------------------------------------------
 # Add User raabe
 # ------------------------------------------------------
-echo "-> Add user"
+echo "-> Add user $myuser"
 useradd -m -G wheel $myuser
 passwd $myuser
 
