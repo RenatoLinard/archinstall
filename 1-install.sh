@@ -19,6 +19,7 @@ lsblk
 echo ""
 read -p "Enter the name of the EFI partition (eg. sda1): " sda1
 read -p "Enter the name of the ROOT partition (eg. sda2): " sda2
+read -p "Enter the name of the VM partition (keep it empty if not required): " sda3
 
 # ------------------------------------------------------
 # Sync time
@@ -45,6 +46,16 @@ read -p "Do you want to format the partitions?" c
 echo "-> Format partitions"
 mkfs.fat -F 32 /dev/$sda1
 mkfs.btrfs -f /dev/$sda2
+if [ -z "$sda3" ]; then
+    # Empty Do nothing
+else
+    read "Do you want to format the VM partition $sda3? (keep it empty if not required)" fvm
+    if [ -z "$fvm" ]; then
+        # Empty Do nothing
+    else
+        mkfs.btrfs -f /dev/$sda3
+    fi
+fi
 lsblk
 echo "DONE."
 
@@ -78,6 +89,12 @@ mount -o compress=zstd:1,noatime,subvol=@home /dev/$sda2 /mnt/home
 mount -o compress=zstd:1,noatime,subvol=@log /dev/$sda2 /mnt/var/log
 mount -o compress=zstd:1,noatime,subvol=@snapshots /dev/$sda2 /mnt/.snapshots
 mount /dev/$sda1 /mnt/boot/efi
+if [ -z "$sda3" ]; then
+    # Empty Do nothing
+else
+    mkdir /mnt/vm
+    mount /dev/$sda3 /mnt/vm
+fi
 echo "DONE."
 lsblk
 
