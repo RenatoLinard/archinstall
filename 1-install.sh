@@ -110,7 +110,7 @@ echo "DONE."
 # ------------------------------------------------------
 mkdir /mnt/archinstall
 cp 2-archinstall.sh /mnt/archinstall/setup.sh
-cp 3-yay.sh /mnt/archinstall/install_yay.sh
-cp 4-zram.sh /mnt/archinstall/install_zram.sh
+cp 3-yay.sh /mnt/archinstall/install-yay.sh
+cp 4-zram.sh /mnt/archinstall/install-zram.sh
 read -p "Do you want to chroot to the installation and continue with 2-archinstall.sh to configure your arch installation?" c
 arch-chroot /mnt ./archinstall/setup.sh
