@@ -11,7 +11,7 @@ echo "START LIBVIRT INSTALLATION..."
 # Install Packages
 # ------------------------------------------------------
 echo "-> Install packages"
-sudo pacman -S virt-manager qemu vde2 ebtables iptables-nft nftables dnsmasq bridge-utils ovmf
+sudo pacman -S virt-manager qemu vde2 ebtables iptables-nft nftables dnsmasq bridge-utils ovmf swtpm
 echo "Packages installed..."
 
 # ------------------------------------------------------
