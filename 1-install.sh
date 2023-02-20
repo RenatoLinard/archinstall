@@ -56,13 +56,9 @@ lsblk
 echo "DONE."
 
 # ------------------------------------------------------
-# Confirm the creation of btrfs subvolumes
-# ------------------------------------------------------
-read -p "Do you want to create the btrfs subvolumes?" c
-
-# ------------------------------------------------------
 # Mount points for btrfs
 # ------------------------------------------------------
+# read -p "Do you want to create the btrfs subvolumes?" c
 echo "-> Create btrfs subvolumes"
 mount /dev/$sda2 /mnt
 btrfs su cr /mnt/@
@@ -76,7 +72,7 @@ echo "DONE."
 # ------------------------------------------------------
 # Confirm the mount of drives
 # ------------------------------------------------------
-read -p "Do you want to mount all drives and subvolumnes?" c
+# read -p "Do you want to mount all drives and subvolumnes?" c
 echo "-> Mount all volumes"
 mount -o compress=zstd:1,noatime,subvol=@ /dev/$sda2 /mnt
 mkdir -p /mnt/{boot/efi,home,.snapshots,var/{cache,log}}
@@ -95,7 +91,7 @@ lsblk
 # ------------------------------------------------------
 # Install base packages
 # ------------------------------------------------------
-read -p "Do you want to install the base packages?" c
+# read -p "Do you want to install the base packages?" c
 echo "-> Install base packages"
 pacstrap -K /mnt base base-devel git linux linux-firmware vim openssh reflector rsync amd-ucode
 echo "DONE."
@@ -103,7 +99,7 @@ echo "DONE."
 # ------------------------------------------------------
 # Generate fstab
 # ------------------------------------------------------
-read -p "Do you want to generate fstab?" c
+# read -p "Do you want to generate fstab?" c
 echo "-> Generate fstab"
 genfstab -U /mnt >> /mnt/etc/fstab
 cat /mnt/etc/fstab
@@ -114,6 +110,7 @@ echo "DONE."
 # ------------------------------------------------------
 mkdir /mnt/archinstall
 cp 2-archinstall.sh /mnt/archinstall/setup.sh
-cp 3-yay.sh /mnt/archinstall/yay.sh
+cp 3-yay.sh /mnt/archinstall/install_yay.sh
+cp 4-zram.sh /mnt/archinstall/install_zram.sh
 read -p "Do you want to chroot to the installation and continue with 2-archinstall.sh to configure your arch installation?" c
 arch-chroot /mnt ./archinstall/setup.sh

@@ -17,8 +17,8 @@ if [ -f "/etc/systemd/zram-generator2.conf" ]; then
 else
 	read -p "Do you want to generate the zram-generator.conf? " c
 	sudo touch /etc/systemd/zram-generator.conf
-	sudo echo "[zram0]" >> /etc/systemd/zram-generator.conf
-	sudo echo "zram-size = ram / 2" >> /etc/systemd/zram-generator.conf
+	sudo bash -c 'echo "[zram0]" >> /etc/systemd/zram-generator.conf'
+	sudo bash -c 'echo "zram-size = ram / 2" >> /etc/systemd/zram-generator.conf'
 fi
 
 # Restart services

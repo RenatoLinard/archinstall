@@ -142,9 +142,10 @@ read -p "Open sudoers now?" c
 EDITOR=vim sudo -E visudo
 usermod -aG wheel $myuser
 
-cp /archinstall/yay.sh /home/$myuser
-
+cp /archinstall/install-yay.sh /home/$myuser
+cp /archinstall/install-zram.sh /home/$myuser
 echo "-> DONE! Please exit & reboot"
 echo "Activate WIFI after reboot with nmtui."
-echo "After successful login as user, you can install AUR helper yay with ./yay.sh"
+echo "After successful login as user, you can install AUR helper yay with ./install-yay.sh"
+echo "You can also install zram for supporting your SSD with ./install-zram.sh (requires yay)"
 
