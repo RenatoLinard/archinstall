@@ -136,7 +136,7 @@ read -p "-> Do you want to continue?" c
 # Add btrfs to mkinitcpio
 # ------------------------------------------------------
 echo "-> Manual step required!"
-echo "Add btrfs to binaries:"
+echo "Add btrfs to binaries (around line 10):"
 echo "Before: BINARIES=()"
 echo "After:  BINARIES=(btrfs)"
 echo ""
@@ -148,7 +148,7 @@ mkinitcpio -p linux
 # Add user to wheel
 # ------------------------------------------------------
 echo "-> Manual step required!"
-echo "Uncomment %wheel ALL=(ALL:ALL) ALL in sudoers"
+echo "Uncomment %wheel group in sudoers (around line 85):"
 echo "Before: #%wheel ALL=(ALL:ALL) ALL"
 echo "After:  %wheel ALL=(ALL:ALL) ALL"
 echo ""
@@ -163,7 +163,7 @@ cp /archinstall/install-yay.sh /home/$myuser
 cp /archinstall/install-zram.sh /home/$myuser
 
 clear
-echo "-> DONE! Please exit & reboot"
+echo "-> DONE! Please exit & reboot (& remove the installation media)"
 echo "Important: Activate WIFI after reboot with nmtui."
 echo "After successful login as user, you can install AUR helper yay with ./install-yay.sh"
 echo "You can also install zram for supporting your SSD with ./install-zram.sh (requires yay)"
