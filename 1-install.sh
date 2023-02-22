@@ -1,20 +1,36 @@
 #!/bin/bash
 
+#     _             _       ___           _        _ _ 
+#    / \   _ __ ___| |__   |_ _|_ __  ___| |_ __ _| | |
+#   / _ \ | '__/ __| '_ \   | || '_ \/ __| __/ _` | | |
+#  / ___ \| | | (__| | | |  | || | | \__ \ || (_| | | |
+# /_/   \_\_|  \___|_| |_| |___|_| |_|___/\__\__,_|_|_|
+# 
+# by Stephan Raabe (2023)                                                     
 # -----------------------------------------------------
 # Arch Base Install Script with btrfs
 # -----------------------------------------------------
+# NAME: ArchIntall
+# DESC: An installation script for Arch Linux.
+# WARNING: Run this script at your own risk.
 
 # ------------------------------------------------------
 # Confirm Start
 # ------------------------------------------------------
-echo " ------------------------------------------------------"
-echo "Welcome to the arch linux install script"
-echo " ------------------------------------------------------"
-echo "Important: Please make sure that you have followed the manual steps in the README to partition the harddisc!"
+clear
+echo "------------------------------------------------------"
+echo "Welcome to the Arch Install script"
+echo "------------------------------------------------------"
+echo "Important: Please make sure that you have followed the "
+echo "manual steps in the README to partition the harddisc!"
+echo "Warning: Run this script at your own risk."
 echo ""
-read -p "Do you want to start the installation now?" c
+echo "DO YOU WANT TO START THE INSTALLATION NOW?"
+read -p "(Return to start, Ctrl+c to cancel)" c
 
+# ------------------------------------------------------
 # Show partitions
+# ------------------------------------------------------
 lsblk
 echo ""
 read -p "Enter the name of the EFI partition (eg. sda1): " sda1
@@ -106,11 +122,18 @@ cat /mnt/etc/fstab
 echo "DONE."
 
 # ------------------------------------------------------
-# Chroot to installed sytem
+# Install configuration scripts
 # ------------------------------------------------------
 mkdir /mnt/archinstall
 cp 2-archinstall.sh /mnt/archinstall/setup.sh
 cp 3-yay.sh /mnt/archinstall/install-yay.sh
 cp 4-zram.sh /mnt/archinstall/install-zram.sh
+
+# ------------------------------------------------------
+# Chroot to installed sytem
+# ------------------------------------------------------
+echo ""
+echo "Base installation DONE."
 read -p "Do you want to chroot to the installation and continue with 2-archinstall.sh to configure your arch installation?" c
 arch-chroot /mnt ./archinstall/setup.sh
+

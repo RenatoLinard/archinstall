@@ -1,14 +1,22 @@
 #!/bin/bash
 
+#   ____             __ _                       _   _             
+#  / ___|___  _ __  / _(_) __ _ _   _ _ __ __ _| |_(_) ___  _ __  
+# | |   / _ \| '_ \| |_| |/ _` | | | | '__/ _` | __| |/ _ \| '_ \ 
+# | |__| (_) | | | |  _| | (_| | |_| | | | (_| | |_| | (_) | | | |
+#  \____\___/|_| |_|_| |_|\__, |\__,_|_|  \__,_|\__|_|\___/|_| |_|
+#                         |___/                                   
+# by Stephan Raabe (2023)
 # ------------------------------------------------------
-# Install Script for Arch Linux
-# Wifi setup information at the bottom
+# Configuration script for Arch Linux
 # ------------------------------------------------------
+# NAME: ArchConfiguration
+# DESC: Configuration script after base installation.
+# WARNING: Ru  this script at your own risk.
 
 # ------------------------------------------------------
 # CONGIG
 # ------------------------------------------------------
-
 echo ""
 echo "------------------------------------------------------"
 echo "START ARCH CONFIGURATION..."
@@ -114,7 +122,7 @@ systemctl enable acpid
 echo "Services enabled"
 
 # ------------------------------------------------------
-# Confirm grub installation
+# Grub installation
 # ------------------------------------------------------
 # read -p "-> Do you want to install grub now?" c
 echo "-> Install GRUB Bootloader"
@@ -128,25 +136,35 @@ read -p "-> Do you want to continue?" c
 # Add btrfs to mkinitcpio
 # ------------------------------------------------------
 echo "-> Manual step required!"
-echo "Add btrfs to binaries: BINARIES=(btrfs)"
+echo "Add btrfs to binaries:"
+echo "Before: BINARIES=()"
+echo "After:  BINARIES=(btrfs)"
+echo ""
 read -p "Open mkinitcpio.conf now?" c
 vim /etc/mkinitcpio.conf
-echo "Start mkinitcpio -p linux"
 mkinitcpio -p linux
 
 # ------------------------------------------------------
 # Add user to wheel
 # ------------------------------------------------------
 echo "-> Manual step required!"
-echo "Uncomment wheel in sudoers"
+echo "Uncomment %wheel ALL=(ALL:ALL) ALL in sudoers"
+echo "Before: #%wheel ALL=(ALL:ALL) ALL"
+echo "After:  %wheel ALL=(ALL:ALL) ALL"
+echo ""
 read -p "Open sudoers now?" c
 EDITOR=vim sudo -E visudo
 usermod -aG wheel $myuser
 
+# ------------------------------------------------------
+# Copy installation scripts to home direkctory 
+# ------------------------------------------------------
 cp /archinstall/install-yay.sh /home/$myuser
 cp /archinstall/install-zram.sh /home/$myuser
+
+clear
 echo "-> DONE! Please exit & reboot"
-echo "Activate WIFI after reboot with nmtui."
+echo "Important: Activate WIFI after reboot with nmtui."
 echo "After successful login as user, you can install AUR helper yay with ./install-yay.sh"
 echo "You can also install zram for supporting your SSD with ./install-zram.sh (requires yay)"
 
