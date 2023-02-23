@@ -38,6 +38,11 @@ if [ -z "$zone_info" ]; then
     zone_info="Europe/Berlin"
 fi
 
+read -p "Enter the hostname  (default: arch): " myhost
+if [ -z "$myhost" ]; then
+    myhost="arch"
+fi
+
 read -p "Enter the desired user name (no spaces and special characters): " myuser
 echo ""
 
@@ -89,10 +94,10 @@ echo "DONE."
 # Set hostname and localhost
 # ------------------------------------------------------
 echo "-> Set hostname and localhost"
-echo "arch" >> /etc/hostname
+echo "$myhost" >> /etc/hostname
 echo "127.0.0.1 localhost" >> /etc/hosts
 echo "::1       localhost" >> /etc/hosts
-echo "127.0.1.1 arch.localdomain arch" >> /etc/hosts
+echo "127.0.1.1 $myhost.localdomain $myhost" >> /etc/hosts
 
 # ------------------------------------------------------
 # Set Root Password
