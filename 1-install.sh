@@ -59,14 +59,30 @@ read -p "Do you want to format the partitions?" c
 # ------------------------------------------------------
 # Format partitions
 # ------------------------------------------------------
-echo "-> Format partitions"
-mkfs.fat -F 32 /dev/$sda1
+while true; do
+    read -p "Do you want to format the UEFI partition? Select no if Windows dual boot. (Yy/Nn)" yn
+    case $yn in
+        [Yy]* ) mkfs.fat -F 32 /dev/$sda1;
+                break;;
+        [Nn]* ) echo "You choose not to format UEFI partition.";
+                break;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
 mkfs.btrfs -f /dev/$sda2
+
 if [ -n "$sda3" ]; then
-    read -p "Do you want to format the VM partition $sda3? (Enter yes. Keep it empty if no.)" fvm
-    if [ -n "$fvm" ]; then
-        mkfs.btrfs -f /dev/$sda3
-    fi
+    while true; do
+    	read -p "Do you want to format the VM partition? Select no if VMs exist. (Yy/Nn)" yn
+    	    case $yn in
+        	[Yy]* ) mkfs.btrfs -f /dev/$sda3
+                    break;;
+        	[Nn]* ) echo "You choose not to format VM partition.";
+                    break;;
+        * ) echo "Please answer yes or no.";;
+        esac
+    done
 fi
 lsblk
 echo "DONE."
