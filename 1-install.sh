@@ -63,13 +63,6 @@ timedatectl set-ntp true
 echo "DONE."
 
 # ------------------------------------------------------
-# Reflector setup
-# ------------------------------------------------------
-echo "-> Set reflector"
-reflector -c Germany -a 4 --sort rate --save /etc/pacman.d/mirrorlist
-echo "DONE."
-
-# ------------------------------------------------------
 # Confirm format of partitions
 # ------------------------------------------------------
 read -p "Do you want to format the partitions?" c
@@ -137,6 +130,13 @@ if [ -n "$sda3" ]; then
 fi
 echo "DONE."
 lsblk
+
+# ------------------------------------------------------
+# Reflector setup
+# ------------------------------------------------------
+echo "-> Set reflector (can take several minutes)"
+reflector -c Germany -a 2 --sort rate --save /etc/pacman.d/mirrorlist
+echo "DONE."
 
 # ------------------------------------------------------
 # Install base packages
