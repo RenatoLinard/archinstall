@@ -139,15 +139,11 @@ echo "DONE."
 read -p "-> Do you want to continue?" c
 
 # ------------------------------------------------------
-# Add btrfs to mkinitcpio
+# Add btrfs and setfont to mkinitcpio
 # ------------------------------------------------------
-echo "-> Manual step required!"
-echo "Add btrfs to binaries (around line 10):"
-echo "Before: BINARIES=()"
-echo "After:  BINARIES=(btrfs)"
-echo ""
-read -p "Open mkinitcpio.conf now?" c
-vim /etc/mkinitcpio.conf
+# Before: BINARIES=()
+# After:  BINARIES=(btrfs setfont)
+sed -i 's/BINARIES=()/BINARIES=(btrfs setfont)/g' /etc/mkinitcpio.conf
 mkinitcpio -p linux
 
 # ------------------------------------------------------
