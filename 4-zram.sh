@@ -1,5 +1,4 @@
 #!/bin/bash
-
 #  _________      _    __  __ 
 # |__  /  _ \    / \  |  \/  |
 #   / /| |_) |  / _ \ | |\/| |
@@ -15,9 +14,30 @@
 # DESC: Installation script for zram.
 # WARNING: Run this script at your own risk.
 
+clear
+echo " _________      _    __  __ "
+echo "|__  /  _ \    / \  |  \/  |"
+echo "  / /| |_) |  / _ \ | |\/| |"
+echo " / /_|  _ <  / ___ \| |  | |"
+echo "/____|_| \_\/_/   \_\_|  |_|"
+echo ""
+
 # -----------------------------------------------------
 # Confirm Start
 # -----------------------------------------------------
+while true; do
+    read -p "DO YOU WANT TO START THE INSTALLATION NOW? (Yy/Nn): " yn
+    case $yn in
+        [Yy]* )
+            echo "Installation started."
+        break;;
+        [Nn]* ) 
+            exit;
+        break;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
 read -p "Do you want to start now?" c
 
 # -----------------------------------------------------
@@ -38,10 +58,6 @@ else
 	sudo bash -c 'echo "zram-size = ram / 2" >> /etc/systemd/zram-generator.conf'
 fi
 
-# -----------------------------------------------------
-# Restart services
-# -----------------------------------------------------
-read -p "Start systemctl services now? " c
 sudo systemctl daemon-reload
 sudo systemctl start /dev/zram0
 
