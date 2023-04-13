@@ -61,7 +61,7 @@ hwclock --systohc
 # Update reflector
 # ------------------------------------------------------
 echo "-> Update reflector (can take several minutes)"
-reflector -c $reflector_country -a 3 --sort rate --save /etc/pacman.d/mirrorlist
+reflector -c "Germany," -p https -a 3 --sort rate --save /etc/pacman.d/mirrorlist
 
 # ------------------------------------------------------
 # Synchronize mirrors
