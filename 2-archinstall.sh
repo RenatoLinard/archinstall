@@ -163,13 +163,12 @@ usermod -aG wheel $myuser
 echo "DONE."
 
 # ------------------------------------------------------
-# Copy installation scripts to post-installation direkctory 
+# Copy installation scripts to home directory 
 # ------------------------------------------------------
-mkdir /home/$myuser/post-installation
-cp /archinstall/install-yay.sh /home/$myuser/post-installation
-cp /archinstall/install-zram.sh /home/$myuser/post-installation
-cp /archinstall/install-timeshift.sh /home/$myuser/post-installation
-cp /archinstall/install-preload.sh /home/$myuser/post/-installation
+cp /archinstall/install-yay.sh /home/$myuser
+cp /archinstall/install-zram.sh /home/$myuser
+cp /archinstall/install-timeshift.sh /home/$myuser
+cp /archinstall/install-preload.sh /home/$myuser
 
 # ------------------------------------------------------
 # DONE 
@@ -182,7 +181,7 @@ echo "| (_| | (_) | | | |  __/ "
 echo " \__,_|\___/|_| |_|\___| "
 echo "                         "
 echo ""
-echo "Please find the following additional installation scripts in your home directory /post-installation"
+echo "Please find the following additional installation scripts in your home directory:"
 echo "- yay AUR helper: install-yay.sh"
 echo "- zram swap: install-zram.sh"
 echo "- timeshift snapshot tool: install-timeshift.sh"
