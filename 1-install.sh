@@ -145,6 +145,7 @@ lsblk
 echo "-> Install base packages"
 pacstrap -K /mnt base base-devel git linux linux-firmware vim openssh reflector rsync amd-ucode
 echo "DONE."
+clear
 
 # ------------------------------------------------------
 # Generate fstab
