@@ -23,7 +23,7 @@ read -p "Do you want to start now?" c
 # -----------------------------------------------------
 # Install zram
 # -----------------------------------------------------
-yay -S zram-generator
+yay --noconfirm -S zram-generator
 
 # -----------------------------------------------------
 # Open zram-generator.conf

@@ -162,6 +162,8 @@ mkdir /mnt/archinstall
 cp 2-archinstall.sh /mnt/archinstall/setup.sh
 cp 3-yay.sh /mnt/archinstall/install-yay.sh
 cp 4-zram.sh /mnt/archinstall/install-zram.sh
+cp 5-timeshift.sh /mnt/archinstall/install-timeshift.sh
+cp 6-preload.sh /mnt/archinstall/install-preload.sh
 
 # ------------------------------------------------------
 # Chroot to installed sytem

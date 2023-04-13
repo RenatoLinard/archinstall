@@ -72,7 +72,7 @@ pacman -Syy
 # Install Packages
 # ------------------------------------------------------
 echo "-> Install packages"
-pacman -S grub xdg-desktop-portal-wlr efibootmgr networkmanager network-manager-applet dialog wpa_supplicant mtools dosfstools base-devel linux-headers avahi xdg-user-dirs xdg-utils gvfs gvfs-smb nfs-utils inetutils dnsutils bluez bluez-utils cups hplip alsa-utils pipewire pipewire-alsa pipewire-pulse pipewire-jack bash-completion openssh rsync reflector acpi acpi_call dnsmasq openbsd-netcat ipset firewalld flatpak sof-firmware nss-mdns acpid os-prober ntfs-3g terminus-font exa bat htop ranger zip unzip neofetch duf xorg xorg-xinit xclip grub-btrfs xf86-video-amdgpu xf86-video-nouveau xf86-video-intel xf86-video-qxl brightnessctl pacman-contrib
+pacman --noconfirm -S grub xdg-desktop-portal-wlr efibootmgr networkmanager network-manager-applet dialog wpa_supplicant mtools dosfstools base-devel linux-headers avahi xdg-user-dirs xdg-utils gvfs gvfs-smb nfs-utils inetutils dnsutils bluez bluez-utils cups hplip alsa-utils pipewire pipewire-alsa pipewire-pulse pipewire-jack bash-completion openssh rsync reflector acpi acpi_call dnsmasq openbsd-netcat ipset firewalld flatpak sof-firmware nss-mdns acpid os-prober ntfs-3g terminus-font exa bat htop ranger zip unzip neofetch duf xorg xorg-xinit xclip grub-btrfs xf86-video-amdgpu xf86-video-nouveau xf86-video-intel xf86-video-qxl brightnessctl pacman-contrib
 
 # ------------------------------------------------------
 # set lang utf8 US
@@ -163,10 +163,15 @@ usermod -aG wheel $myuser
 # ------------------------------------------------------
 cp /archinstall/install-yay.sh /home/$myuser
 cp /archinstall/install-zram.sh /home/$myuser
+cp /archinstall/install-timeshift.sh /home/$myuser
 
+# ------------------------------------------------------
+# DONE 
+# ------------------------------------------------------
 clear
-echo "-> DONE! Please exit & reboot (& remove the installation media)"
-echo "Important: Activate WIFI after reboot with nmtui."
+echo "-> DONE! Please exit & shutdown (shutdown -h now), remove the installation media and start again."
+echo "Important: Activate WIFI after restart with nmtui."
 echo "After successful login as user, you can install AUR helper yay with ./install-yay.sh"
 echo "You can also install zram for supporting your SSD with ./install-zram.sh (requires yay)"
+echo "Install ./install-timeshift.sh to create snapshots for your system (requires yay)"
 
