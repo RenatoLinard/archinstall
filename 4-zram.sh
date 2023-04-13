@@ -38,8 +38,6 @@ while true; do
     esac
 done
 
-read -p "Do you want to start now?" c
-
 # -----------------------------------------------------
 # Install zram
 # -----------------------------------------------------
@@ -49,16 +47,13 @@ yay --noconfirm -S zram-generator
 # Open zram-generator.conf
 # -----------------------------------------------------
 if [ -f "/etc/systemd/zram-generator2.conf" ]; then
-	read -p "zram-generator.conf already exists. Do you want to open?" c
-	sudo vim /etc/systemd/zram-generator.conf
+    echo "/etc/systemd/zram-generator.conf already exists!"
 else
-	read -p "Do you want to generate the zram-generator.conf? " c
 	sudo touch /etc/systemd/zram-generator.conf
 	sudo bash -c 'echo "[zram0]" >> /etc/systemd/zram-generator.conf'
 	sudo bash -c 'echo "zram-size = ram / 2" >> /etc/systemd/zram-generator.conf'
+    sudo systemctl daemon-reload
+    sudo systemctl start /dev/zram0
 fi
-
-sudo systemctl daemon-reload
-sudo systemctl start /dev/zram0
 
 echo "DONE! Reboot now and check with free -h the ZRAM installation."
