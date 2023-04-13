@@ -151,6 +151,7 @@ mkinitcpio -p linux
 # ------------------------------------------------------
 # Add user to wheel
 # ------------------------------------------------------
+clear
 echo "-> Manual step required!"
 echo "Uncomment %wheel group in sudoers (around line 85):"
 echo "Before: #%wheel ALL=(ALL:ALL) ALL"
@@ -159,21 +160,33 @@ echo ""
 read -p "Open sudoers now?" c
 EDITOR=vim sudo -E visudo
 usermod -aG wheel $myuser
+echo "DONE."
 
 # ------------------------------------------------------
-# Copy installation scripts to home direkctory 
+# Copy installation scripts to post-installation direkctory 
 # ------------------------------------------------------
-cp /archinstall/install-yay.sh /home/$myuser
-cp /archinstall/install-zram.sh /home/$myuser
-cp /archinstall/install-timeshift.sh /home/$myuser
+mkdir /home/$myuser/post-installation
+cp /archinstall/install-yay.sh /home/$myuser/post-installation
+cp /archinstall/install-zram.sh /home/$myuser/post-installation
+cp /archinstall/install-timeshift.sh /home/$myuser/post-installation
+cp /archinstall/install-preload.sh /home/$myuser/post/-installation
 
 # ------------------------------------------------------
 # DONE 
 # ------------------------------------------------------
 clear
-echo "-> DONE! Please exit & shutdown (shutdown -h now), remove the installation media and start again."
+echo "     _                   "
+echo "  __| | ___  _ __   ___  "
+echo " / _' |/ _ \| '_ \ / _ \ "
+echo "| (_| | (_) | | | |  __/ "
+echo " \__,_|\___/|_| |_|\___| "
+echo "                         "
+echo ""
+echo "Please find the following additional installation scripts in your home directory /post-installation"
+echo "- yay AUR helper: install-yay.sh"
+echo "- zram swap: install-zram.sh"
+echo "- timeshift snapshot tool: install-timeshift.sh"
+echo "- preload application cache: install-preload.sh"
+echo ""
+echo "Please exit & shutdown (shutdown -h now), remove the installation media and start again."
 echo "Important: Activate WIFI after restart with nmtui."
-echo "After successful login as user, you can install AUR helper yay with ./install-yay.sh"
-echo "You can also install zram for supporting your SSD with ./install-zram.sh (requires yay)"
-echo "Install ./install-timeshift.sh to create snapshots for your system (requires yay)"
-
