@@ -134,9 +134,9 @@ lsblk
 # ------------------------------------------------------
 # Reflector setup
 # ------------------------------------------------------
-echo "-> Set reflector (can take several minutes)"
-reflector -c Germany -a 2 --sort rate --save /etc/pacman.d/mirrorlist
-echo "DONE."
+# echo "-> Set reflector (can take several minutes)"
+# reflector -c Germany -a 2 --sort rate --save /etc/pacman.d/mirrorlist
+# echo "DONE."
 
 # ------------------------------------------------------
 # Install base packages
