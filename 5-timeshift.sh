@@ -46,3 +46,5 @@ done
 yay --noconfirm -S timeshift
 
 echo "DONE!"
+echo "You can create snapshots and update the GRUB Bootloader with ./snapshot.sh"
+

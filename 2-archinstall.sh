@@ -169,6 +169,7 @@ cp /archinstall/install-yay.sh /home/$myuser
 cp /archinstall/install-zram.sh /home/$myuser
 cp /archinstall/install-timeshift.sh /home/$myuser
 cp /archinstall/install-preload.sh /home/$myuser
+cp /archinstall/snapshot.sh /home/$myuser
 
 # ------------------------------------------------------
 # DONE 
