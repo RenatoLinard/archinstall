@@ -54,5 +54,12 @@ cd archinstall
 
 Please note that the scripts in folder /optional are not tested yet.
 
-The other scripts have been designed to support my preferred configuration of my Arch linux installation.
+After the installation you will find additional scripts in your home folder to install
+
+- yay aur helper
+- zram swap file
+- timeshift snapshots
+- preload application cache
+
+Please also check out the dotfiles to configure qtile and several other applications.
 
