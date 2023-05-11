@@ -11,7 +11,6 @@ To get detailed information how to install Arch Linux, please visit https://wiki
 
 ```
 # Load keyboard layout (replace de with us, fr, es if needed)
-loadkeys de
 loadkeys de-latin1
 
 # Increase font size (optional)
