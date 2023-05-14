@@ -17,7 +17,7 @@ username="raabe"
 # ------------------------------------------------------
 # Set System Time
 # ------------------------------------------------------
-ln -sf /usr/share/zoneinfo/$zone_info /etc/localtime
+ln -sf /usr/share/zoneinfo/$zoneinfo /etc/localtime
 hwclock --systohc
 
 # ------------------------------------------------------
@@ -46,15 +46,15 @@ echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 # Set Keyboard
 # ------------------------------------------------------
 echo "FONT=ter-v18n" >> /etc/vconsole.conf
-echo "KEYMAP=$keyboard_layout" >> /etc/vconsole.conf
+echo "KEYMAP=$keyboardlayout" >> /etc/vconsole.conf
 
 # ------------------------------------------------------
 # Set hostname and localhost
 # ------------------------------------------------------
-echo "$myhost" >> /etc/hostname
+echo "$hostname" >> /etc/hostname
 echo "127.0.0.1 localhost" >> /etc/hosts
 echo "::1       localhost" >> /etc/hosts
-echo "127.0.1.1 $myhost.localdomain $myhost" >> /etc/hosts
+echo "127.0.1.1 $hostname.localdomain $hostname" >> /etc/hosts
 clear
 
 # ------------------------------------------------------
@@ -66,9 +66,9 @@ passwd root
 # ------------------------------------------------------
 # Add User
 # ------------------------------------------------------
-echo "Add user $myuser"
-useradd -m -G wheel $myuser
-passwd $myuser
+echo "Add user $username"
+useradd -m -G wheel $username
+passwd $username
 
 # ------------------------------------------------------
 # Enable Services
@@ -107,16 +107,16 @@ echo "After:  %wheel ALL=(ALL:ALL) ALL"
 echo ""
 read -p "Open sudoers now?" c
 EDITOR=vim sudo -E visudo
-usermod -aG wheel $myuser
+usermod -aG wheel $username
 
 # ------------------------------------------------------
 # Copy installation scripts to home directory 
 # ------------------------------------------------------
-cp /archinstall/3-yay.sh /home/$myuser
-cp /archinstall/4-zram.sh /home/$myuser
-cp /archinstall/5-timeshift.sh /home/$myuser
-cp /archinstall/6-preload.sh /home/$myuser
-cp /archinstall/snapshot.sh /home/$myuser
+cp /archinstall/3-yay.sh /home/$username
+cp /archinstall/4-zram.sh /home/$username
+cp /archinstall/5-timeshift.sh /home/$username
+cp /archinstall/6-preload.sh /home/$username
+cp /archinstall/snapshot.sh /home/$username
 
 clear
 echo "     _                   "
