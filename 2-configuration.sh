@@ -8,77 +8,36 @@
 #                         |___/                                   
 # by Stephan Raabe (2023)
 # ------------------------------------------------------
-# Configuration script for Arch Linux
-# ------------------------------------------------------
-# NAME: ArchConfiguration
-# DESC: Configuration script after base installation.
-# WARNING: Ru  this script at your own risk.
-
-# ------------------------------------------------------
-# CONGIG
-# ------------------------------------------------------
 clear
-echo ""
-echo "------------------------------------------------------"
-echo "START ARCH CONFIGURATION..."
-echo "------------------------------------------------------"
-echo ""
-
-read -p "Enter the country for reflector (for pacman) (default: Germany): " reflector_country
-if [ -z "$reflector_country" ]; then
-    reflector_country="Germany"
-fi
-
-read -p "Enter the keyboard layout (default: de-latin1): " keyboard_layout
-if [ -z "$keyboard_layout" ]; then
-    keyboard_layout="de-latin1"
-fi
-
-read -p "Enter the zoneinfo (default: Europe/Berlin): " zone_info
-if [ -z "$zone_info" ]; then
-    zone_info="Europe/Berlin"
-fi
-
-read -p "Enter the hostname  (default: arch): " myhost
-if [ -z "$myhost" ]; then
-    myhost="arch"
-fi
-
-read -p "Enter the desired user name (no spaces and special characters): " myuser
-echo ""
-
-read -p "Do you want to start? (to cancel with strg/cmd-c)" s
-echo ""
+keyboardlayout="de-latin1"
+zoneinfo="Europe/Berlin"
+hostname="arch"
+username="raabe"
 
 # ------------------------------------------------------
 # Set System Time
 # ------------------------------------------------------
-echo "-> Set system time and sync with the internet"
 ln -sf /usr/share/zoneinfo/$zone_info /etc/localtime
 hwclock --systohc
 
 # ------------------------------------------------------
 # Update reflector
 # ------------------------------------------------------
-echo "-> Update reflector (can take several minutes)"
 reflector -c "Germany," -p https -a 3 --sort rate --save /etc/pacman.d/mirrorlist
 
 # ------------------------------------------------------
 # Synchronize mirrors
 # ------------------------------------------------------
-echo "-> Sync package mirrors"
 pacman -Syy
 
 # ------------------------------------------------------
 # Install Packages
 # ------------------------------------------------------
-echo "-> Install packages"
 pacman --noconfirm -S grub xdg-desktop-portal-wlr efibootmgr networkmanager network-manager-applet dialog wpa_supplicant mtools dosfstools base-devel linux-headers avahi xdg-user-dirs xdg-utils gvfs gvfs-smb nfs-utils inetutils dnsutils bluez bluez-utils cups hplip alsa-utils pipewire pipewire-alsa pipewire-pulse pipewire-jack bash-completion openssh rsync reflector acpi acpi_call dnsmasq openbsd-netcat ipset firewalld flatpak sof-firmware nss-mdns acpid os-prober ntfs-3g terminus-font exa bat htop ranger zip unzip neofetch duf xorg xorg-xinit xclip grub-btrfs xf86-video-amdgpu xf86-video-nouveau xf86-video-intel xf86-video-qxl brightnessctl pacman-contrib
 
 # ------------------------------------------------------
 # set lang utf8 US
 # ------------------------------------------------------
-echo "-> Set language"
 echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 locale-gen
 echo "LANG=en_US.UTF-8" >> /etc/locale.conf
@@ -86,15 +45,12 @@ echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 # ------------------------------------------------------
 # Set Keyboard
 # ------------------------------------------------------
-echo "-> Set keyboard layout"
 echo "FONT=ter-v18n" >> /etc/vconsole.conf
 echo "KEYMAP=$keyboard_layout" >> /etc/vconsole.conf
-echo "DONE."
 
 # ------------------------------------------------------
 # Set hostname and localhost
 # ------------------------------------------------------
-echo "-> Set hostname and localhost"
 echo "$myhost" >> /etc/hostname
 echo "127.0.0.1 localhost" >> /etc/hosts
 echo "::1       localhost" >> /etc/hosts
@@ -104,20 +60,19 @@ clear
 # ------------------------------------------------------
 # Set Root Password
 # ------------------------------------------------------
-echo "-> Set root password"
+echo "Set root password"
 passwd root
 
 # ------------------------------------------------------
-# Add User raabe
+# Add User
 # ------------------------------------------------------
-echo "-> Add user $myuser"
+echo "Add user $myuser"
 useradd -m -G wheel $myuser
 passwd $myuser
 
 # ------------------------------------------------------
 # Enable Services
 # ------------------------------------------------------
-echo "-> Enable services"
 systemctl enable NetworkManager
 systemctl enable bluetooth
 systemctl enable cups.service
@@ -127,18 +82,12 @@ systemctl enable reflector.timer
 systemctl enable fstrim.timer
 systemctl enable firewalld
 systemctl enable acpid
-echo "Services enabled"
 
 # ------------------------------------------------------
 # Grub installation
 # ------------------------------------------------------
-# read -p "-> Do you want to install grub now?" c
-echo "-> Install GRUB Bootloader"
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB --removable
 grub-mkconfig -o /boot/grub/grub.cfg
-echo "DONE."
-
-read -p "-> Do you want to continue?" c
 
 # ------------------------------------------------------
 # Add btrfs and setfont to mkinitcpio
@@ -152,7 +101,6 @@ mkinitcpio -p linux
 # Add user to wheel
 # ------------------------------------------------------
 clear
-echo "-> Manual step required!"
 echo "Uncomment %wheel group in sudoers (around line 85):"
 echo "Before: #%wheel ALL=(ALL:ALL) ALL"
 echo "After:  %wheel ALL=(ALL:ALL) ALL"
@@ -160,20 +108,16 @@ echo ""
 read -p "Open sudoers now?" c
 EDITOR=vim sudo -E visudo
 usermod -aG wheel $myuser
-echo "DONE."
 
 # ------------------------------------------------------
 # Copy installation scripts to home directory 
 # ------------------------------------------------------
-cp /archinstall/install-yay.sh /home/$myuser
-cp /archinstall/install-zram.sh /home/$myuser
-cp /archinstall/install-timeshift.sh /home/$myuser
-cp /archinstall/install-preload.sh /home/$myuser
+cp /archinstall/3-yay.sh /home/$myuser
+cp /archinstall/4-zram.sh /home/$myuser
+cp /archinstall/5-timeshift.sh /home/$myuser
+cp /archinstall/6-preload.sh /home/$myuser
 cp /archinstall/snapshot.sh /home/$myuser
 
-# ------------------------------------------------------
-# DONE 
-# ------------------------------------------------------
 clear
 echo "     _                   "
 echo "  __| | ___  _ __   ___  "
@@ -183,10 +127,10 @@ echo " \__,_|\___/|_| |_|\___| "
 echo "                         "
 echo ""
 echo "Please find the following additional installation scripts in your home directory:"
-echo "- yay AUR helper: install-yay.sh"
-echo "- zram swap: install-zram.sh"
-echo "- timeshift snapshot tool: install-timeshift.sh"
-echo "- preload application cache: install-preload.sh"
+echo "- yay AUR helper: 3-yay.sh"
+echo "- zram swap: 4-zram.sh"
+echo "- timeshift snapshot tool: 5-timeshift.sh"
+echo "- preload application cache: 6-preload.sh"
 echo ""
 echo "Please exit & shutdown (shutdown -h now), remove the installation media and start again."
 echo "Important: Activate WIFI after restart with nmtui."
