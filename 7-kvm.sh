@@ -1,23 +1,30 @@
 #!/bin/bash
+#  _  ____     ____  __  
+# | |/ /\ \   / /  \/  | 
+# | ' /  \ \ / /| |\/| | 
+# | . \   \ V / | |  | | 
+# |_|\_\   \_/  |_|  |_| 
+#                        
+#  
+# by Stephan Raabe (2023) 
+# ----------------------------------------------------- 
 
 # ------------------------------------------------------
 # Install Script for Libvirt
 # ------------------------------------------------------
 
 read -p "Do you want to start? " s
-echo "START LIBVIRT INSTALLATION..."
+echo "START KVM/QEMU/VIRT MANAGER INSTALLATION..."
 
 # ------------------------------------------------------
 # Install Packages
 # ------------------------------------------------------
-echo "-> Install packages"
-sudo pacman -S virt-manager qemu vde2 ebtables iptables-nft nftables dnsmasq bridge-utils ovmf swtpm
-echo "Packages installed..."
+sudo pacman -S virt-manager virt-viewer qemu vde2 ebtables iptables-nft nftables dnsmasq bridge-utils ovmf swtpm
 
 # ------------------------------------------------------
 # Edit libvirtd.conf
 # ------------------------------------------------------
-echo "-> Manual Steps required:"
+echo "Manual steps required:"
 echo "Open sudo vim /etc/libvirt/libvirtd.conf:"
 echo 'Remove # at the following lines: unix_sock_group = "libvirt" and unix_sock_rw_perms = "0770"'
 read -p "Press any key to open libvirtd.conf: " c
@@ -28,18 +35,13 @@ sudo echo 'log_outputs="2:file:/var/log/libvirt/libvirtd.log"' >> /etc/libvirt/l
 # ------------------------------------------------------
 # Add user to the group
 # ------------------------------------------------------
-echo "-> Add user to groups"
 sudo usermod -a -G kvm,libvirt $(whoami)
-echo "DONE."
 
 # ------------------------------------------------------
 # Enable services
 # ------------------------------------------------------
-echo "-> Enable services"
 sudo systemctl enable libvirtd
 sudo systemctl start libvirtd
-echo "Services enabled..."
-echo "DONE."
 
 # ------------------------------------------------------
 # Edit qemu.conf
@@ -55,15 +57,11 @@ sudo vim /etc/libvirt/qemu.conf
 # ------------------------------------------------------
 # Restart Services
 # ------------------------------------------------------
-echo "-> Restart services"
 sudo systemctl restart libvirtd
-echo "DONE."
 
 # ------------------------------------------------------
 # Autostart Network
 # ------------------------------------------------------
-echo "-> Set network to autostart"
 sudo virsh net-autostart default
-echo "DONE."
 
-echo "Please restart now with reboot."
+echo "Please restart your system with reboot."
