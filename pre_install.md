@@ -16,19 +16,19 @@ ping -c4 www.archlinux.org
 lsblk
 
 ## Create partitions
-## If the disk from which you want to boot already has an EFI system partition, do not create another one, but use the existing partition instead.
+ If the disk from which you want to boot already has an EFI system partition, do not create another one, but use the existing partition instead.
 
 gdisk /dev/sda
-### Partition 1: +512M ef00 (for EFI)
-### Partition 2: Available space 8300 (for Linux filesystem)
-### (Optional Partition 3 for Virtual Machines)
-### Write w, Confirm Y
+ Partition 1: +512M ef00 (for EFI)
+ Partition 2: Available space 8300 (for Linux filesystem)
+ (Optional Partition 3 for Virtual Machines)
+ Write w, Confirm Y
 
 ## Sync package
 pacman -Syy
 
 ## Maybe it's required to install the current archlinux keyring
-### if the installation of git fails.
+ if the installation of git fails.
 pacman -S archlinux-keyring
 pacman -Syy
 
