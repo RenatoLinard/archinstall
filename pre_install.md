@@ -1,7 +1,7 @@
 # Pre Install
 
 ## Load keyboard layout (replace de with us, fr, es if needed)
-loadkeys de-latin1
+loadkeys br-abnt
 
 ## Increase font size (optional)
 setfont ter-p20b
