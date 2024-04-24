@@ -9,10 +9,10 @@
 # by Stephan Raabe (2023)
 # ------------------------------------------------------
 clear
-keyboardlayout="de-latin1"
-zoneinfo="Europe/Berlin"
+keyboardlayout="br-abnt"
+zoneinfo="America/Campo_Grande"
 hostname="arch"
-username="raabe"
+username="renatolinard"
 
 # ------------------------------------------------------
 # Set System Time
@@ -24,7 +24,7 @@ hwclock --systohc
 # Update reflector
 # ------------------------------------------------------
 echo "Start reflector..."
-reflector -c "Germany," -p https -a 3 --sort rate --save /etc/pacman.d/mirrorlist
+reflector -c "Brazil," -p https -a 3 --sort rate --save /etc/pacman.d/mirrorlist
 
 # ------------------------------------------------------
 # Synchronize mirrors
@@ -39,9 +39,9 @@ pacman --noconfirm -S grub xdg-desktop-portal-wlr efibootmgr networkmanager netw
 # ------------------------------------------------------
 # set lang utf8 US
 # ------------------------------------------------------
-echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+echo "pt_BR.UTF-8 UTF-8" >> /etc/locale.gen
 locale-gen
-echo "LANG=en_US.UTF-8" >> /etc/locale.conf
+echo "LANG=pt_BR.UTF-8" >> /etc/locale.conf
 
 # ------------------------------------------------------
 # Set Keyboard
@@ -117,6 +117,7 @@ cp /archinstall/3-yay.sh /home/$username
 cp /archinstall/4-zram.sh /home/$username
 cp /archinstall/5-timeshift.sh /home/$username
 cp /archinstall/6-preload.sh /home/$username
+cp /archinstall/7-kvm.sh /home/$username
 cp /archinstall/snapshot.sh /home/$username
 
 clear
