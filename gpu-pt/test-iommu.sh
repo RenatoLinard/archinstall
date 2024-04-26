@@ -8,10 +8,13 @@
 # by Stephan Raabe (2023) 
 # ----------------------------------------------------- 
 
+#!/bin/bash
 shopt -s nullglob
 for g in /sys/kernel/iommu_groups/*; do
-    echo "IOMMU Group ${g##*/}:"
-    for d in $g/devices/*; do
-        echo -e "\t$(lspci -nns ${d##*/})"
-    done;
+    if [ -d "$g/devices" ]; then
+        echo "IOMMU Group ${g##*/}:"
+        for d in $g/devices/*; do
+            echo -e "\t$(lspci -nns ${d##*/})"
+        done;
+    fi
 done;
