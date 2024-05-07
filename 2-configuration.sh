@@ -9,7 +9,7 @@
 # by Stephan Raabe (2023)
 # ------------------------------------------------------
 clear
-keyboardlayout="br-abnt"
+keyboardlayout="br-abnt2"
 zoneinfo="America/Campo_Grande"
 hostname="arch"
 username="renatolinard"
@@ -115,10 +115,7 @@ usermod -aG wheel $username
 # ------------------------------------------------------
 cp /archinstall/3-yay.sh /home/$username
 cp /archinstall/4-zram.sh /home/$username
-cp /archinstall/5-timeshift.sh /home/$username
 cp /archinstall/6-preload.sh /home/$username
-cp /archinstall/7-kvm.sh /home/$username
-cp /archinstall/snapshot.sh /home/$username
 
 clear
 echo "     _                   "
