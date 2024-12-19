@@ -6,7 +6,7 @@ loadkeys br-abnt
 ## Increase font size (optional)
 setfont ter-p20b
 
-Após a inicialização, ative a conexão Wi-Fi com os seguintes comandos:
+## Conexão Wi-Fi com os seguintes comandos:
 
 ```shell
 iwctl
