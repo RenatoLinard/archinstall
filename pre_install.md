@@ -6,8 +6,16 @@ loadkeys br-abnt
 ## Increase font size (optional)
 setfont ter-p20b
 
-## Connect to WLAN (if not LAN)
-iwctl --passphrase [password] station wlan0 connect [network]
+Após a inicialização, ative a conexão Wi-Fi com os seguintes comandos:
+
+```shell
+iwctl
+device list
+adapter [nome_do_adaptador] set-property Powered on
+station wlan0 show
+station wlan0 scan
+station wlan0 connect [nome_da_rede]
+```
 
 ## Check internet connection
 ping -c4 www.archlinux.org
